@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   
   
+  <meta name="description" content="redis数据库详细语法及说明见[http://redisdoc.com/]下面仅对其常见的五种数据类型的语法进行介绍
+1字符串setex（如果键存在才能设置值）setnx（如果键不存在才能设置值）；mset（一次设置多个键值对）mget（一次获取多个键值对）；incr str1 将str1中存储的">
+  
 
   
   
@@ -14,15 +17,19 @@
   
   
   
-  <title>玄武岩</title>
+  <title>redis数据库主要语法-及与mysql结合用法示例 | 玄武岩</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="玄武岩">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="redis数据库详细语法及说明见[http://redisdoc.com/]下面仅对其常见的五种数据类型的语法进行介绍 1字符串setex（如果键存在才能设置值）setnx（如果键不存在才能设置值）；mset（一次设置多个键值对）mget（一次获取多个键值对）；incr str1 将str1中存储的数字值增1getset（拿到键之前的值并对其进行新的赋值）gitbit(取指定位上的比特看是否为0)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis数据库主要语法-及与mysql结合用法示例">
+<meta property="og:url" content="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/index.html">
 <meta property="og:site_name" content="玄武岩">
+<meta property="og:description" content="redis数据库详细语法及说明见[http://redisdoc.com/]下面仅对其常见的五种数据类型的语法进行介绍 1字符串setex（如果键存在才能设置值）setnx（如果键不存在才能设置值）；mset（一次设置多个键值对）mget（一次获取多个键值对）；incr str1 将str1中存储的数字值增1getset（拿到键之前的值并对其进行新的赋值）gitbit(取指定位上的比特看是否为0)">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-02T12:28:23.924Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="玄武岩">
+<meta name="twitter:title" content="redis数据库主要语法-及与mysql结合用法示例">
+<meta name="twitter:description" content="redis数据库详细语法及说明见[http://redisdoc.com/]下面仅对其常见的五种数据类型的语法进行介绍 1字符串setex（如果键存在才能设置值）setnx（如果键不存在才能设置值）；mset（一次设置多个键值对）mget（一次获取多个键值对）；incr str1 将str1中存储的数字值增1getset（拿到键之前的值并对其进行新的赋值）gitbit(取指定位上的比特看是否为0)">
   
   
     <link rel="icon" href="http://7u2hdm.com1.z0.glb.clouddn.com/favicon.ico">
@@ -68,123 +75,15 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
-  
-    <article id="post-django环境搭建" class="post-django环境搭建 post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-redis数据库主要语法-及与mysql结合用法示例" class="post-redis数据库主要语法-及与mysql结合用法示例 post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
         
         
   
-    <h1 class="entry-title">
-      <a class="article-title" href="/2019/01/02/django环境搭建/">django环境搭建</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqf5s2040000kournxyt6mh8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <h2 id="1-无图形化界面安装虚拟环境"><a href="#1-无图形化界面安装虚拟环境" class="headerlink" title="1.无图形化界面安装虚拟环境"></a>1.无图形化界面安装虚拟环境</h2><h3 id="1-1安装虚拟器"><a href="#1-1安装虚拟器" class="headerlink" title="1.1安装虚拟器"></a>1.1安装虚拟器</h3><pre><code>pip install virtualenv
-</code></pre><h3 id="1-2创建虚拟环境"><a href="#1-2创建虚拟环境" class="headerlink" title="1.2创建虚拟环境"></a>1.2创建虚拟环境</h3><pre><code>virtual --no-site-packages -p D:\python3\python.exe name
-</code></pre><p>–no-site-packages：表示创建的虚拟环境为纯净的环境，不安装有其他的库<br>-p D:\python3\python.exe 使用的python版本及其地址（当电脑中只有一个python版本时，此步可省略）<br>name 虚拟库的名字</p>
-<h3 id="1-3pip使用"><a href="#1-3pip使用" class="headerlink" title="1.3pip使用"></a>1.3pip使用</h3><pre><code>pip list  查看安装的库
-</code></pre><p>pip install xxx 安装xxx的库</p>
-<h3 id="1-4激活虚拟环境"><a href="#1-4激活虚拟环境" class="headerlink" title="1.4激活虚拟环境"></a>1.4激活虚拟环境</h3><p>windwos下直接执行activate命令<br>mac/linux/ubuntu:直接执行source activate命令</p>
-<pre><code>activate
-</code></pre><h3 id="1-5退出虚拟环境"><a href="#1-5退出虚拟环境" class="headerlink" title="1.5退出虚拟环境"></a>1.5退出虚拟环境</h3><p>直接执行deactivate命令</p>
-<pre><code>deactivate
-</code></pre><h3 id="1-6创建django项目"><a href="#1-6创建django项目" class="headerlink" title="1.6创建django项目"></a>1.6创建django项目</h3><p>1.在虚拟环境中先激活虚拟环境：activate<br>2.在激活环境下进入想要创建到的位置文件夹 cd ../cd<br>3.创建django项目：django-admin startproject day01</p>
-<p>启动命令：python manage.py runserver 默认ip为127.0.0.1 默认端口为8000<br>修改启动端口：python manage.py runserver 端口<br>修改ip和端口：python manage.py runserver ip:端口<br>ip参数：如果为0.0.0.0表示任何人都可以通过公网访问django项目<br>端口post参数：如果端口设置为80.表示该端口访问时可以不用写</p>
-<h2 id="2django项目各文件的意义"><a href="#2django项目各文件的意义" class="headerlink" title="2django项目各文件的意义"></a>2django项目各文件的意义</h2><h3 id="2-1-manager-py"><a href="#2-1-manager-py" class="headerlink" title="2.1 manager.py"></a>2.1 manager.py</h3><p>manager.py启动文件</p>
-<h3 id="2-2-init-py"><a href="#2-2-init-py" class="headerlink" title="2.2__init__.py"></a>2.2__init__.py</h3><p><strong>init</strong>.py包文件:可以通过这个文件将该包下的文件导入其他文件</p>
-<h3 id="2-3settings-py-配置文件"><a href="#2-3settings-py-配置文件" class="headerlink" title="2.3settings.py 配置文件"></a>2.3settings.py 配置文件</h3><pre><code>os.path.abspath(__file__)：当前文件的绝对路径
-os.path.dirname(os.path.abspath(__file__))：当前文件的上层目录的绝对路径
-os.path.dirname(os.path.dirname(os.path.abspath(__file__)))：当前文件的上层的上层的目录的绝对路径（即当前项目的绝对路径）
-DEBUG = True：调试模式，上线的时候需要将其改层False
-ALLOWED_HOSTS = [&quot;*&quot;]：允许访问的主机的ip地址
-ROOT_URLCONF = &apos;day01.urls&apos;：根路由
-DATABASES ：数据库配置
-    STATIC_URL = &apos;/static/&apos; ：配置html文件路径
-</code></pre><h3 id="2-4urls-py路由文件"><a href="#2-4urls-py路由文件" class="headerlink" title="2.4urls.py路由文件"></a>2.4urls.py路由文件</h3><p>将网址写在这个文件中，将能在计算机上对其进行访问</p>
-<pre><code>path(&apos;admin/&apos;, admin.site.urls)， 在端口后加/admin访问
-path(&apos;hello&apos;,views.hello),加的hello后缀指向views文件下的hello函数
-</code></pre><h3 id="2-5wsgi-py"><a href="#2-5wsgi-py" class="headerlink" title="2.5wsgi.py"></a>2.5wsgi.py</h3><p>wsgi.py网关文件</p>
-<h2 id="3创建一个app文件"><a href="#3创建一个app文件" class="headerlink" title="3创建一个app文件"></a>3创建一个app文件</h2><pre><code>python manage.py startapp app名称 - 创建一个app文件 
-</code></pre><p>在app文件夹中一般都是对models.py和views.py两个文件进行操作，其他文件一般不作改动</p>
-<h2 id="4MVT模式和MVC模式区别"><a href="#4MVT模式和MVC模式区别" class="headerlink" title="4MVT模式和MVC模式区别"></a>4MVT模式和MVC模式区别</h2><p>MVC模式是所有框架遵循的模式<br>MVT模式是由MVC模式演变而来的</p>
-<h3 id="4-1MVC模式"><a href="#4-1MVC模式" class="headerlink" title="4.1MVC模式"></a>4.1MVC模式</h3><pre><code> M：模型层
-V：模板，HTML页面
-C：controller，控制器，写业务逻辑的地方
-</code></pre><h3 id="4-2MVT模式"><a href="#4-2MVT模式" class="headerlink" title="4.2MVT模式"></a>4.2MVT模式</h3><pre><code>M：models.py，模型层，定义模型和数据库中的表之间的关联关系
-V；viems.py，视图层，定义业务逻辑
-T；templates，模板，定义页面HTML的地方
-</code></pre><p>django框架遵循MVT模式</p>
-<h2 id="5配置修改"><a href="#5配置修改" class="headerlink" title="5配置修改"></a>5配置修改</h2><h3 id="5-1修改init-py配置"><a href="#5-1修改init-py配置" class="headerlink" title="5.1修改init.py配置"></a>5.1修改<strong>init</strong>.py配置</h3><pre><code>import pymysql
-pymysql.install_as_MySQLdb()
-</code></pre><p>因为python3无法直接访问数据库，只有通过pymysql安装MySQLdb()驱动来访问数据库</p>
-<h3 id="5-2数据库连接配置"><a href="#5-2数据库连接配置" class="headerlink" title="5.2数据库连接配置"></a>5.2数据库连接配置</h3><pre><code>数据库连接
-settings.py中配置
-USER参数：访问用户
-PASSWORD参数：密码
-HOST参数：访问数据库的地址
-PORT参数：访问数据库的端口
-NAME参数:数据库名（必须是已经存在的数据库）
-</code></pre><h3 id="5-3数据迁移"><a href="#5-3数据迁移" class="headerlink" title="5.3数据迁移"></a>5.3数据迁移</h3><h4 id="5-3-1第一次迁移"><a href="#5-3-1第一次迁移" class="headerlink" title="5.3.1第一次迁移"></a>5.3.1第一次迁移</h4><pre><code>python manage.py migrate
-</code></pre><h4 id="5-3-2第一次后的迁移"><a href="#5-3-2第一次后的迁移" class="headerlink" title="5.3.2第一次后的迁移"></a>5.3.2第一次后的迁移</h4><pre><code>settings.py第33行INSTALLED_APPS的最后添加需要迁移的文件夹
-生成迁移文件：python manage.py makemigrations
-执行迁移文件：python manage.py migrate
-</code></pre><h2 id="6创建表格"><a href="#6创建表格" class="headerlink" title="6创建表格"></a>6创建表格</h2><p>在app文件夹下的models.py文件中创建</p>
-<pre><code>from django.db import models
-class Student(models.Model):
-    s_name=models.CharField(max_length=10,unique=True)#代表字段是字符串类型
-    s_age=models.IntegerField(default=20)#代表字段是整型，默认为20
-    s_gender=models.BooleanField(default=0)
-    # auto_now_add:创建时，默认字段赋值为最新的时间
-    create_time=models.DateTimeField(auto_now_add=True)
-    # auto_now:修改数据时，自动赋值为更新字段时的时间
-    update_time=models.DateTimeField(auto_now=True)
-
-    class Meta:
-        db_table=&apos;student&apos;
-</code></pre><p>将app文件添加至settings.py文件的33行后面；<br>然后在命令行中输入迁移指令：python manage.py makemigrations将生成一个迁移文件（0001_initial.py）<br>最后执行迁移指令：python manage.py migrate，新建的表格将被上传至数据库。</p>
-<h2 id="7创建超级管理员"><a href="#7创建超级管理员" class="headerlink" title="7创建超级管理员"></a>7创建超级管理员</h2><pre><code>python manage.py createsuperuser
-</code></pre>
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2019/01/02/django环境搭建/">
-    <time datetime="2019-01-02T11:01:25.000Z" class="entry-date">
-        2019-01-02
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-
-
-
-
-
-
-  
-    <article id="post-redis数据库主要语法-及与mysql结合用法示例" class="post-redis数据库主要语法-及与mysql结合用法示例 post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/">redis数据库主要语法-及与mysql结合用法示例</a>
+    <h1 class="entry-title article-title">
+      redis数据库主要语法-及与mysql结合用法示例
     </h1>
   
 
@@ -377,105 +276,22 @@ def my_dis():
 </article>
 
 
-
-
-
-
-  
-    <article id="post-新建博客" class="post-新建博客 post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/12/20/新建博客/">新建博客</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/新建博客/" data-id="cjqf5s20n0002kourvea0fckj" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/12/20/新建博客/">
-    <time datetime="2018-12-20T12:43:36.000Z" class="entry-date">
-        2018-12-20
-    </time>
-</a>
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/01/02/django环境搭建/" rel="prev"><span class="meta-nav">←</span> django环境搭建</a></span>
     
     
-    </footer>
-</article>
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="post-hello-world post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2018/12/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqf5s20h0001kourkgx8nzmf" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2018/12/20/hello-world/">
-    <time datetime="2018-12-20T11:12:25.367Z" class="entry-date">
-        2018-12-20
-    </time>
-</a>
+        <span class="nav-next"><a href="/2018/12/20/新建博客/" rel="next">新建博客 <span class="meta-nav">→</span></a></span>
     
-    
-    </footer>
-</article>
+</nav><!-- .nav-single -->
 
 
 
 
 
 
-  
-  
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
