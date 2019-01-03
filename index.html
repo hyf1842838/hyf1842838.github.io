@@ -70,6 +70,151 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-模型关系映射" class="post-模型关系映射 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/01/03/模型关系映射/">模型关系映射</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqgl28w500038ouruob2799m" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>导入函数或者文件方法：先写一个函数名或者其他，然后按alt+enter<br>ctrl+d 快速复制当前行并粘贴到下一行<br>ctrl+y 删除当前行<br>模型层<br> ORM技术:对象关系映射  —objects relationship mapping<br>对象关系映射：将模型中的语句映射为数据库中的语句，可以通过编写模型中的语句对数据库(多种)进行操作<br>objects：管理器，默认模型的属性<br>在orm技术中，pk代表表格的主键（primary key）</p>
+<h2 id="1-添加学生对象（create）"><a href="#1-添加学生对象（create）" class="headerlink" title="1 添加学生对象（create）"></a>1 添加学生对象（create）</h2><p>创建 create（）方法：模型名.objects.create(字段1=值，字段2=值)<br>save方法：模型对象.save（）</p>
+<h3 id="1-1-create方法"><a href="#1-1-create方法" class="headerlink" title="1.1 create方法"></a>1.1 create方法</h3><pre><code>def add_stu(request):
+    Student.objects.create(s_name=&apos;小明&apos;)
+    return HttpResponse(&apos;创建学生成功&apos;)
+</code></pre><h3 id="1-2-save方法"><a href="#1-2-save方法" class="headerlink" title="1.2 save方法"></a>1.2 save方法</h3><pre><code>def add_stu(request):
+    stu = Student()
+    stu.s_name = &apos;老王&apos;
+    stu.s_gender = 1
+    stu.save()
+    return HttpResponse(&apos;创建学生成功&apos;)
+</code></pre><h2 id="2-删除学生"><a href="#2-删除学生" class="headerlink" title="2 删除学生"></a>2 删除学生</h2><p>删除学生的步骤：<br>1.获取删除的对象，filter(条件)<br> 2.实现删除方法 delete()<br>删除 delete（）方法：模型名.objects.filter(条件).delete()</p>
+<pre><code>def del_stu(request):
+    Student.objects.filter(id=13).delete()
+    return HttpResponse(&apos;删除成功&apos;)
+</code></pre><h2 id="3-更新（修改）学生"><a href="#3-更新（修改）学生" class="headerlink" title="3 更新（修改）学生"></a>3 更新（修改）学生</h2><p>更新学生步骤：<br>1.获取更新的数据，filter（条件）<br> 2.实现更新方法， update（）<br>修改 update（）方法：模型名.objects.filter(条件).update(字段1=值，字段2=值)<br>save（）方法：模型对象.save<br>update（）和save（）的区别：是否更新使用auto_now约束条件的字段，（update不更新）</p>
+<h3 id="3-1update方法"><a href="#3-1update方法" class="headerlink" title="3.1update方法"></a>3.1update方法</h3><pre><code>def up_stu(request):
+    Student.objects.filter(id=4).update(s_name=&apos;妲己&apos;)
+    return HttpResponse(&apos;更新成功&apos;)
+</code></pre><h3 id="3-2save方法"><a href="#3-2save方法" class="headerlink" title="3.2save方法"></a>3.2save方法</h3><pre><code>def up_stu(request):
+    stu = Student.objects.filter(id=2).first()
+    stu.s_name = &apos;妲己2&apos;
+    stu.save()
+    return HttpResponse(&apos;更新成功&apos;)
+</code></pre><h2 id="4查询学生"><a href="#4查询学生" class="headerlink" title="4查询学生"></a>4查询学生</h2><h3 id="4-1查询所有学生"><a href="#4-1查询所有学生" class="headerlink" title="4.1查询所有学生"></a>4.1查询所有学生</h3><p>查询所有的学生信息,all()，返回一组对象的列表</p>
+<pre><code>def sel_stu(request):
+    stus = Student.objects.all()
+    for stu in stus:
+        print(stu.s_name)
+</code></pre><h3 id="4-2查询特定的单个学生"><a href="#4-2查询特定的单个学生" class="headerlink" title="4.2查询特定的单个学生"></a>4.2查询特定的单个学生</h3><h4 id="4-2-1filter方法"><a href="#4-2-1filter方法" class="headerlink" title="4.2.1filter方法"></a>4.2.1filter方法</h4><p>返回的是queryset对象</p>
+<pre><code>stu5 = Student.objects.filter(id=6)
+print(stu)  # &lt;QuerySet [&lt;Student: Student object (6)&gt;]&gt;
+</code></pre><p>first()：取出结果中的第一个对象</p>
+<pre><code>stu = Student.objects.filter(id=6).first()
+print(stu)  # Student object (6)
+</code></pre><h4 id="4-2-2get（）方法"><a href="#4-2-2get（）方法" class="headerlink" title="4.2.2get（）方法"></a>4.2.2get（）方法</h4><p>get（）只能用来取唯一的一个对象<br>get（条件）条件必须成立才能使用</p>
+<pre><code>stu = Student.objects.get(id=6)
+print(stu)  # Student object (6)（返回id为6的学生对象）
+</code></pre><h3 id="4-3查询特定的多个学生"><a href="#4-3查询特定的多个学生" class="headerlink" title="4.3查询特定的多个学生"></a>4.3查询特定的多个学生</h3><pre><code>stus = Student.objects.filter(s_gender=1)
+print(stus) #查询所有的男性
+</code></pre><h3 id="4-4exclude（条件）方法"><a href="#4-4exclude（条件）方法" class="headerlink" title="4.4exclude（条件）方法"></a>4.4exclude（条件）方法</h3><p>exclude(条件):过滤出不满足条件的信息</p>
+<pre><code>stus = Student.objects.exclude(s_gender=0)
+print(stus)#查询所有性别为女的之外的性别的人（即查询全部男性）
+</code></pre><h3 id="4-5order-by-排序方法"><a href="#4-5order-by-排序方法" class="headerlink" title="4.5order_by()排序方法"></a>4.5order_by()排序方法</h3><p>order_by（’id’）,升序<br>order_by（’-id’）,降序</p>
+<pre><code>stus = Student.objects.order_by(&apos;id&apos;)
+print(stus)
+</code></pre><h3 id="4-6values（）方法"><a href="#4-6values（）方法" class="headerlink" title="4.6values（）方法"></a>4.6values（）方法</h3><p>values（）取出对象中的某个字段-返回的是一个列表，列表中为字典</p>
+<pre><code>stus = Student.objects.all().values(&apos;s_name&apos;, &apos;s_age&apos;) #取所有人的姓名和年龄
+stus1 = Student.objects.all().values() #取所有人的所有信息
+print(stus, stus1)
+</code></pre><h3 id="4-7exists-方法、len-方法及count-方法"><a href="#4-7exists-方法、len-方法及count-方法" class="headerlink" title="4.7exists()方法、len()方法及count()方法"></a>4.7exists()方法、len()方法及count()方法</h3><p>exists()方法 - 判断查询信息存在否，返回布尔值</p>
+<pre><code># 判断小张这个人存在不
+a = Student.objects.filter(s_name=&apos;小张&apos;).exists()
+print(a)  # False
+
+stus = Student.objects.filter(s_gender=1)
+# len查看查询结果的长度
+print(len(stus))  # 2
+
+# count统计查询结果元素的个数
+b = Student.objects.filter(s_gender=1).count()
+print(b)  # 2
+</code></pre><h3 id="4-8模糊查询（contains、startswith及endswith）"><a href="#4-8模糊查询（contains、startswith及endswith）" class="headerlink" title="4.8模糊查询（contains、startswith及endswith）"></a>4.8模糊查询（contains、startswith及endswith）</h3><h4 id="4-8-1contains方法"><a href="#4-8-1contains方法" class="headerlink" title="4.8.1contains方法"></a>4.8.1contains方法</h4><p>contains:包含，模糊查询；语法，字段__contains=</p>
+<pre><code>stus = Student.objects.filter(s_name__contains=&apos;小明&apos;)
+print(stus)
+</code></pre><h4 id="4-8-2startswith方法"><a href="#4-8-2startswith方法" class="headerlink" title="4.8.2startswith方法"></a>4.8.2startswith方法</h4><p>startswith:以什么开头</p>
+<pre><code>stus = Student.objects.filter(s_name__startswith=&apos;小&apos;)
+print(stus)
+</code></pre><h4 id="4-8-3endswith方法"><a href="#4-8-3endswith方法" class="headerlink" title="4.8.3endswith方法"></a>4.8.3endswith方法</h4><p>endswith:以什么结束</p>
+<pre><code>stus = Student.objects.filter(s_name__endswith=&apos;明&apos;)
+print(stus)
+</code></pre><h3 id="4-9in方法"><a href="#4-9in方法" class="headerlink" title="4.9in方法"></a>4.9in方法</h3><p>in：查询在某个范围之内</p>
+<pre><code>stus = Student.objects.filter(id__in=[1, 2, 3, 4, 5])
+print(stus)
+
+stus = Student.objects.filter(pk__in=[1, 2, 3, 4, 5])
+print(stus)
+</code></pre><p>pk代表主键，而id是这个学生表的主键，所以结果将一样</p>
+<h3 id="4-10大于及小于符号"><a href="#4-10大于及小于符号" class="headerlink" title="4.10大于及小于符号"></a>4.10大于及小于符号</h3><p>gte:大于等于；gt：大于；lte：小于等于；lt：小于<br>在比较符号后面必须是一个值</p>
+<pre><code>stus = Student.objects.filter(s_age__gte=21, s_age__lte=23)
+stus=Student.objects.filter(s_age__gte=21).filter(s_age__lte=23)
+</code></pre><p>上面两条语句的结果相同，都为查询年龄大于等于21且小于等于23的人</p>
+<h3 id="4-11与或非"><a href="#4-11与或非" class="headerlink" title="4.11与或非"></a>4.11与或非</h3><p>用与或非语句的时候，需要先导入Q方法</p>
+<h4 id="4-11-1与"><a href="#4-11-1与" class="headerlink" title="4.11.1与"></a>4.11.1与</h4><pre><code>stus = Student.objects.filter(s_age__gte=21, s_age__lte=23)
+stus = Student.objects.filter(Q(s_age__gte=21), Q(s_age__lte=23))
+stus = Student.objects.filter(Q(s_age__gte=21) and Q(s_age__lte=23))
+stus = Student.objects.filter(Q(s_age__gte=21) &amp; Q(s_age__lte=23))
+</code></pre><h4 id="4-11-2或"><a href="#4-11-2或" class="headerlink" title="4.11.2或"></a>4.11.2或</h4><pre><code>stus = Student.objects.filter(Q(s_age__gte=21) or Q(s_age__lte=23))
+stus = Student.objects.filter(Q(s_age__gte=21) | Q(s_age__lte=23))
+</code></pre><h4 id="4-11-3非"><a href="#4-11-3非" class="headerlink" title="4.11.3非"></a>4.11.3非</h4><pre><code>stus = Student.objects.filter(~Q(s_age__gte=21))
+</code></pre><h4 id="4-11-4对象属性比较"><a href="#4-11-4对象属性比较" class="headerlink" title="4.11.4对象属性比较"></a>4.11.4对象属性比较</h4><p>查询物理成绩大于数学成绩的学生</p>
+<pre><code>stus = Student.objects.all()
+for stu in stus:
+    if (stu.wuli &gt; stu.math):
+        print(stu.s_name)
+</code></pre><p>上面方法也能达到要求，但不推荐；推荐使用下面方法<br> F(‘math’):取math对应的值</p>
+<pre><code>stus = Student.objects.filter(wuli__gt=F(&apos;math&apos;))
+</code></pre><h3 id="4-12聚合函数Avg-Max-Sum-Count"><a href="#4-12聚合函数Avg-Max-Sum-Count" class="headerlink" title="4.12聚合函数Avg,Max,Sum,Count"></a>4.12聚合函数Avg,Max,Sum,Count</h3><pre><code>def sel_stu(request):
+    age_avg = Student.objects.all().aggregate(Avg(&apos;s_age&apos;))
+    print(age_avg)
+    age_sum = Student.objects.all().aggregate(Sum(&apos;s_age&apos;))
+    print(age_sum)
+    return HttpResponse(&apos;查询所有学生信息&apos;)
+</code></pre>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/03/模型关系映射/">
+    <time datetime="2019-01-03T12:22:25.000Z" class="entry-date">
+        2019-01-03
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-django环境搭建" class="post-django环境搭建 post type-post status-publish format-standard hentry">
     <!---->
 
@@ -85,7 +230,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqf5s2040000kournxyt6mh8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqgl28u600008our24s4la3d" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -191,7 +336,7 @@ class Student(models.Model):
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/" data-id="cjqf5s20z0003kourn9oniza3" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/" data-id="cjqgl28wr00048our1hijs4gq" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -397,7 +542,7 @@ def my_dis():
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/新建博客/" data-id="cjqf5s20n0002kourvea0fckj" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/新建博客/" data-id="cjqgl28w200028ourwzzidznh" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -439,7 +584,7 @@ def my_dis():
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqf5s20h0001kourkgx8nzmf" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqgl28vr00018our46jusejt" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -494,6 +639,10 @@ def my_dis():
       <ul>
         
           <li>
+            <a href="/2019/01/03/模型关系映射/">模型关系映射</a>
+          </li>
+        
+          <li>
             <a href="/2019/01/02/django环境搭建/">django环境搭建</a>
           </li>
         
@@ -527,7 +676,7 @@ def my_dis():
   <aside class="widget">
     <h3 class="widget-title">Archives</h3>
     <div class="widget-content">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </aside>
 
