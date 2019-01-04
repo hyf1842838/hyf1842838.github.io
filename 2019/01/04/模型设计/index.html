@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="玄武岩">
 <meta property="og:description" content="1模型设计部分参数1.1迁移表中db_table指定db_table参数，表示模型迁移时，映射到数据库中的表名称如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名 1.2模型中的外键约束中的on_delete参数on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）on_delete=models.PROTECT：不让删主表">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-04T14:03:23.133Z">
+<meta property="og:updated_time" content="2019-01-04T14:51:18.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模型设计">
 <meta name="twitter:description" content="1模型设计部分参数1.1迁移表中db_table指定db_table参数，表示模型迁移时，映射到数据库中的表名称如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名 1.2模型中的外键约束中的on_delete参数on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）on_delete=models.PROTECT：不让删主表">
@@ -90,7 +90,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqi414vi0004scurs9q9zufj" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqi5prrj0004akur3uly6cn2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -228,21 +228,8 @@ def add_grade(request):
 def index(request):
     stus=Student.objects.all()
     return render(request,&apos;index.html&apos;,{&apos;a&apos;:stus})
-</code></pre><h3 id="14-3前端渲染模板"><a href="#14-3前端渲染模板" class="headerlink" title="14.3前端渲染模板"></a>14.3前端渲染模板</h3><pre><code>1.解析变量：{{变量}}
-2.解析标签：{% 标签 %}{% endfor标签 %}    
-{{ a }} #解析变量
-&lt;br&gt; #换行标签
-{% for stu in a %} #for标签
-	      <p>姓名：{{ stu.s_name }}
-	          年龄：{{ stu.s_age }}
-	          班级：{{ stu.g.g_name }}
-	          选课：
-	          {% for c in stu.course_set.all %}
-	              {{ c.c_name }}
-	              {% endfor %}
-    &lt;/p&gt;
-{% endfor %} #结束标签
-</p></code></pre>
+</code></pre><h3 id="14-3前端渲染模板"><a href="#14-3前端渲染模板" class="headerlink" title="14.3前端渲染模板"></a>14.3前端渲染模板</h3><p>1.解析变量：<br>2.解析标签：{\% 标签 %}{\% endfor标签 %}<br>​<br>       #解析变量<br>      <br> #换行标签<br>       #结束标签</p>
+
       
     </div><!-- .entry-content -->
 
