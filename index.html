@@ -85,7 +85,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqi5prrj0004akur3uly6cn2" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqi88etv0004tour7we1uulr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -223,8 +223,20 @@ def add_grade(request):
 def index(request):
     stus=Student.objects.all()
     return render(request,&apos;index.html&apos;,{&apos;a&apos;:stus})
-</code></pre><h3 id="14-3前端渲染模板"><a href="#14-3前端渲染模板" class="headerlink" title="14.3前端渲染模板"></a>14.3前端渲染模板</h3><p>1.解析变量：<br>2.解析标签：{\% 标签 %}{\% endfor标签 %}<br>​<br>       #解析变量<br>      <br> #换行标签<br>       #结束标签</p>
-
+</code></pre><h3 id="14-3前端渲染模板"><a href="#14-3前端渲染模板" class="headerlink" title="14.3前端渲染模板"></a>14.3前端渲染模板</h3><p>1.解析变量：<br>2.解析标签：{\% 标签 %}{\% endfor标签 %}</p>
+<pre><code>{{ a }} #解析变量
+&lt;br&gt; #换行标签
+{% for stu in a %} #for标签
+        <p>姓名：{{ stu.s_name }}
+            年龄：{{ stu.s_age }}
+            班级：{{ stu.g.g_name }}
+            选课：
+            {% for c in stu.course_set.all %}
+                {{ c.c_name }}
+                {% endfor %}
+    &lt;/p&gt;
+{% endfor %} #结束标签
+</p></code></pre>
       
     </div><!-- .entry-content -->
 
@@ -260,7 +272,7 @@ def index(request):
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqi5prr10002akurubtwvnfe" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqi88etj0002tour8299vd8b" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -405,7 +417,7 @@ for stu in stus:
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqi5prqa0000akurp9h9jb7y" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqi88et10000tourjvnv2twz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -511,7 +523,7 @@ class Student(models.Model):
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/" data-id="cjqi5prrg0003akuraa9ib82r" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/" data-id="cjqi88ets0003tourgkcefrg8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -717,7 +729,7 @@ def my_dis():
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqi5prqo0001akurlqqbeklh" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqi88etd0001tourafzooylk" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
