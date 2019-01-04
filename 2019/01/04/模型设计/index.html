@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="1模型设计部分参数1.1迁移表中db_table指定db_table参数，表示模型迁移时，映射到数据库中的表名称如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名
+1.2模型中的外键约束中的on_delete参数on_delete=models.CASCADE:不能">
+  
+
+  
+  
+  <meta name="google-site-verification" content="NCXVSqxqB-os803-VFMtIEd1SUNJVOIjctCfNYUwD0w">
+  <meta name="baidu-site-verification" content="Nzwx7HuplM">
+  
+  <meta name="msvalidate.01" content="9E9EA92F7E5327E1FE8A5196D5253664">
+  
+  
+  
+  <title>模型设计 | 玄武岩</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1模型设计部分参数1.1迁移表中db_table指定db_table参数，表示模型迁移时，映射到数据库中的表名称如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名 1.2模型中的外键约束中的on_delete参数on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）on_delete=models.PROTECT：不让删主表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模型设计">
+<meta property="og:url" content="http://yoursite.com/2019/01/04/模型设计/index.html">
+<meta property="og:site_name" content="玄武岩">
+<meta property="og:description" content="1模型设计部分参数1.1迁移表中db_table指定db_table参数，表示模型迁移时，映射到数据库中的表名称如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名 1.2模型中的外键约束中的on_delete参数on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）on_delete=models.PROTECT：不让删主表">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-04T14:03:23.133Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模型设计">
+<meta name="twitter:description" content="1模型设计部分参数1.1迁移表中db_table指定db_table参数，表示模型迁移时，映射到数据库中的表名称如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名 1.2模型中的外键约束中的on_delete参数on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）on_delete=models.PROTECT：不让删主表">
+  
+  
+    <link rel="icon" href="http://7u2hdm.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="玄武岩" rel="home">玄武岩</a>
+      </h1>
+      
+        <script type="text/javascript" src="http://api.hitokoto.us/rand?encode=js&charset=utf-8"></script>
+        <h2 class="site-description"><script>hitokoto();</script></h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://it-ebooks.flygon.net/">电子书</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/makes">MAKES</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about">关于我</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/atom.xml">RSS</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://github.com/hyf1842838/blog">fork me on github</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-模型设计" class="post-模型设计 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      模型设计
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqi414vi0004scurs9q9zufj" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h2 id="1模型设计部分参数"><a href="#1模型设计部分参数" class="headerlink" title="1模型设计部分参数"></a>1模型设计部分参数</h2><h3 id="1-1迁移表中db-table"><a href="#1-1迁移表中db-table" class="headerlink" title="1.1迁移表中db_table"></a>1.1迁移表中db_table</h3><p>指定db_table参数，表示模型迁移时，映射到数据库中的表名称<br>如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名</p>
+<h3 id="1-2模型中的外键约束中的on-delete参数"><a href="#1-2模型中的外键约束中的on-delete参数" class="headerlink" title="1.2模型中的外键约束中的on_delete参数"></a>1.2模型中的外键约束中的on_delete参数</h3><p>on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）<br>on_delete=models.PROTECT：不让删主表，但可以删从表<br>on_delete=models.SET_NULL：删除主表，从表的关联字段(外键)设置为空</p>
+<h3 id="1-3模型中外键约束中的related-name参数"><a href="#1-3模型中外键约束中的related-name参数" class="headerlink" title="1.3模型中外键约束中的related_name参数"></a>1.3模型中外键约束中的related_name参数</h3><p>related_name:关联对象反向引用描述符<br>related_name=’info’：给反向引用描述符命名为info；如果不设置，则默认为模型名的全小写</p>
+<h2 id="2模型设计部分字段类型"><a href="#2模型设计部分字段类型" class="headerlink" title="2模型设计部分字段类型"></a>2模型设计部分字段类型</h2><p>CharField:字符串类型<br>TextField：存储长文本内容，前端的areatext标签<br>IntegerField:整型<br>ImageField:字符串类型，用于存图片<br>BooleanField:布尔，True或者False<br>DateTimeField:日期，年月日时分秒<br>DateField：年月日<br>FloatField：浮点类型</p>
+<p>DecimalField：浮点类型，限制最大长度和小数点后的长度<br>unique：是否唯一<br>default：默认值<br>null：是否可以为空</p>
+<p>primary_key：主键（电脑可以自己赋值）<br>auto_now_add:创建时，默认赋值为当前时间<br>auto_now：在创建或者修改时，默认赋值为当前时间（更新时只能用save方法更新）<br>max_length:最大长度</p>
+<h2 id="3一对一模型中给从表添加对象"><a href="#3一对一模型中给从表添加对象" class="headerlink" title="3一对一模型中给从表添加对象"></a>3一对一模型中给从表添加对象</h2><p>一对一（OneToOneField），常写作（1：1），定义在模型中的任何一方都可以<br>存储：<br>    关联字段存储1：stu_info.关联字段=关联对象<br>        stu_info.stu=Student.objects.get(id=1)<br>    关联字段存储2: stu_info.关联字段_id=主键id值<br>        stu_info.stu_id=1<br>查询：<br>    学生对象查拓展表对象：学生对象.拓展模型名称的小写<br>    拓展表查询学生对象：拓展表对象.外键约束字段<br>学生与其紧急联系人之间为一对一模型关系<br>先在models中创建StudentInfo模型</p>
+<pre><code>class StudentInfo(models.Model):
+    s_no = models.CharField(max_length=10,null=False)
+    phone = models.CharField(max_length=11,null=True)
+    name = models.CharField(max_length=10,null=True)
+    设置stu字段并为其设置为1对1属性
+    stu = models.OneToOneField(Student,on_delete=models.SET_NULL,
+                           related_name=&apos;info&apos;,null=True)
+</code></pre><p>在对从表添加数据并为其主键赋值时，有两种写法<br>stu_info（从表对象）.stu（从表字段）=Student.objects.get(id=1)（主表具体的对象）<br>stu_info.stu_id（外键）=1（主表对应的主键）；功能都是相同的。</p>
+<h3 id="3-1对外键赋值方法一"><a href="#3-1对外键赋值方法一" class="headerlink" title="3.1对外键赋值方法一"></a>3.1对外键赋值方法一</h3><pre><code>def add_stu_info(request):
+    stu_info = StudentInfo()
+    stu_info.s_no=&apos;12556&apos;
+    stu_info.phone=&apos;13981366521&apos;
+    stu_info.name=&apos;小王&apos;
+    stu_info.stu=Student.objects.get(id=1)
+    stu_info.save()
+    return HttpResponse(&apos;创建拓展信息成功&apos;)
+</code></pre><h3 id="3-2对外键赋值方法二"><a href="#3-2对外键赋值方法二" class="headerlink" title="3.2对外键赋值方法二"></a>3.2对外键赋值方法二</h3><pre><code>def add_stu_info(request):
+    stu_info = StudentInfo()
+    stu_info.s_no=&apos;12556&apos;
+    stu_info.phone=&apos;13981366521&apos;
+    stu_info.name=&apos;小王&apos;
+    stu_info.stu_id=1
+    stu_info.save()
+    return HttpResponse(&apos;创建拓展信息成功&apos;)
+</code></pre><h2 id="4一对一模型中通过主表查询从表（不用related-name参数）"><a href="#4一对一模型中通过主表查询从表（不用related-name参数）" class="headerlink" title="4一对一模型中通过主表查询从表（不用related_name参数）"></a>4一对一模型中通过主表查询从表（不用related_name参数）</h2><p>过程：<br>1.查询主表（学生）对象<br>2.通过主表（学生）对象查询从表（拓展表）对象<br>在主表查从表获取连表条件时有两种写法：<br>stu_info=StudentInfo.objects.filter(stu（从表字段）=stu（主表对象）).first()<br>stu_info=StudentInfo.objects.filter(stu_id（从表字段）=stu.id（主表对象的属性）).first()</p>
+<h3 id="4-1查询方法1"><a href="#4-1查询方法1" class="headerlink" title="4.1查询方法1"></a>4.1查询方法1</h3><pre><code>def sel_phone_by_stu(request):
+    stu=Student.objects.filter(s_name=&apos;小明&apos;).first()
+    stu_info=StudentInfo.objects.filter(stu=stu).first()
+    phone=stu_info.phone
+    return HttpResponse(&apos;查询电话成功&apos;)
+</code></pre><h3 id="4-2查询方法2"><a href="#4-2查询方法2" class="headerlink" title="4.2查询方法2"></a>4.2查询方法2</h3><pre><code>def sel_phone_by_stu(request):
+    stu=Student.objects.filter(s_name=&apos;小明&apos;).first()
+    stu_info=StudentInfo.objects.filter(stu_id=stu.id).first()
+    phone=stu_info.phone
+    return HttpResponse(&apos;查询电话成功&apos;)
+</code></pre><h2 id="5一对一模型中通过主表查询从表（用related-name参数）"><a href="#5一对一模型中通过主表查询从表（用related-name参数）" class="headerlink" title="5一对一模型中通过主表查询从表（用related_name参数）"></a>5一对一模型中通过主表查询从表（用related_name参数）</h2><p>反向引用过程：<br>1.查询学生对象<br>2.反向查询；关联模型对象，关联另外一个模型的名称的小写</p>
+<h3 id="5-1使用模型中默认的related-name参数"><a href="#5-1使用模型中默认的related-name参数" class="headerlink" title="5.1使用模型中默认的related_name参数"></a>5.1使用模型中默认的related_name参数</h3><p>模型中默认的related_name参数为模型名的全小写</p>
+<pre><code>def sel_phone_by_stu2(request):
+    stu=Student.objects.filter(s_name=&apos;小明&apos;).first()
+    stu_info = stu.studentinfo #studentinfo反向引用符
+    phone=stu_info.phone
+    print(phone)
+    return HttpResponse(&apos;查询电话成功&apos;)
+</code></pre><h3 id="5-2使用设置的related-name参数"><a href="#5-2使用设置的related-name参数" class="headerlink" title="5.2使用设置的related_name参数"></a>5.2使用设置的related_name参数</h3><p>在模型中的主键中设置：stu = models.OneToOneField(Student,on_delete=models.SET_NULL,<br> related_name=’info’,null=True)；将related_name设置为info</p>
+<pre><code>def sel_phone_by_stu2(request):
+    stu=Student.objects.filter(s_name=&apos;小明&apos;).first()
+    stu_info = stu.info #info反向引用符
+    phone=stu_info.phone
+    print(phone)
+    return HttpResponse(&apos;查询电话成功&apos;)
+</code></pre><h2 id="6一对一模型中通过从表查询主表"><a href="#6一对一模型中通过从表查询主表" class="headerlink" title="6一对一模型中通过从表查询主表"></a>6一对一模型中通过从表查询主表</h2><p>1.查询拓展表信息<br>2.查询学生对象</p>
+<pre><code>def sel_stu_by_info(request):
+    stu_info=StudentInfo.objects.filter(s_no=&apos;12556&apos;).first()
+    stu（学生对象）=stu_info（拓展对象）.stu（拓展表字段）
+    print(stu.s_name)
+    return HttpResponse(&apos;查询成功&apos;)
+</code></pre><h2 id="7一对一模型中删除信息"><a href="#7一对一模型中删除信息" class="headerlink" title="7一对一模型中删除信息"></a>7一对一模型中删除信息</h2><p>当模型中为关联字段设置on_delete时，各参数的意义；<br>stu = models.OneToOneField(Student,on_delete=models.SET_NULL）<br>on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）<br>on_delete=models.PROTECT：不让删主表，但可以删从表<br>on_delete=models.SET_NULL：删除主表，从表的关联字段(外键)设置为空</p>
+<pre><code>def on_delete_stu(request):
+    Student.objects.filter(s_name=&apos;小明&apos;).delete()
+    return HttpResponse(&apos;删除成功&apos;)
+</code></pre><h2 id="8一对多模型中创建班级"><a href="#8一对多模型中创建班级" class="headerlink" title="8一对多模型中创建班级"></a>8一对多模型中创建班级</h2><p>一对多（ForeignKey），常写作（1：N），定义在多的一方<br>存储（给学生设置班级）：<br>    关联字段的存储1：学生对象.关系字段=关联模型对象<br>    关联字段的存储2：学生对象.关系字段_id=关联表的主键id值<br>查询：<br>若没有定义related_name参数：<br>    学生查询班级：班级对象=多的一方（学生）对象.关联字段<br>    班级查询学生：一的一方（班级）.关联模型名的小写_s<br>若定义了related_name参数：<br>    学生查班级：多的一方（学生）对象.关联字段<br>    班级查询学生：一的一方（班级）.related_name参数名<br>先创建一个班级模型；班级与学生之间为一对多模型</p>
+<pre><code>class Grade(models.Model):
+    g_name=models.CharField(max_length=10,unique=True)
+    class Meta:
+        db_table=&apos;grade&apos;
+
+def add_grade(request):
+    Grade.objects.create(g_name=&apos;java1807&apos;)
+    return HttpResponse(&apos;添加班级成功&apos;)
+</code></pre><h2 id="9给学生设置班级"><a href="#9给学生设置班级" class="headerlink" title="9给学生设置班级"></a>9给学生设置班级</h2><pre><code>def stu_grade(request):
+    stu=Student.objects.get(pk=4)
+    stu.g_id=1 #给该对象的g_id属性（班级）赋值为1
+    stu.save()
+    return HttpResponse(&apos;分配学生班级成功&apos;)
+</code></pre><h2 id="10通过学生查询班级"><a href="#10通过学生查询班级" class="headerlink" title="10通过学生查询班级"></a>10通过学生查询班级</h2><pre><code>def sel_grade_by_stu(request):
+    # 获取姓名叫小明2的学生对象
+    stu=Student.objects.get(s_name=&apos;小明2&apos;)
+    # 获取班级对象
+    grade=stu.g
+    print(grade.g_name)
+    return HttpResponse(&apos;查询成功&apos;)
+</code></pre><h2 id="11通过班级查询学生"><a href="#11通过班级查询学生" class="headerlink" title="11通过班级查询学生"></a>11通过班级查询学生</h2><pre><code>def sel_stu_by_grade(request):
+    grade=Grade.objects.get(g_name=&apos;python1808&apos;)
+    stus=grade.student_set.all()
+    print(stus)#返回含有对象的列表
+    stus=grade.student_set
+    print(stus)#返回app.Student.None
+    return HttpResponse(&apos;查询成功&apos;)
+</code></pre><h2 id="12多对多模型中创建课程"><a href="#12多对多模型中创建课程" class="headerlink" title="12多对多模型中创建课程"></a>12多对多模型中创建课程</h2><p>多对多（ManyToManyField），常写作（N：M），可以定义在模型中的任何一方<br>多对多的存储同一对多一样；<br>1.在查询方面如果没有设置related_name参数；<br>    当用课程查询学生时，查询方式为：课程对象.关联字段.filter（）<br>    用学生查询课程时，查询方式为：学生对象.关联模型名的小写_set<br>2.如果设置了related_name参数：<br>    用课程查询学生:课程对象.关联字段.filter().all()<br>    用学生查询课程:学生对象.related_name参数.filter().all()<br>创建一个课程表，课程与学生之间为多对多关系</p>
+<pre><code>class Course(models.Model):
+    c_name=models.CharField(max_length=10,unique=True)
+    # ManyToManyField字段定义在任何一个模型都可以
+    stu=models.ManyToManyField(Student,null=True)
+    class Meta:
+        db_table=&apos;course&apos;
+</code></pre><p>往课程表中添加课程</p>
+<pre><code>def add_course(request):
+    c_names=[&apos;大学英语&apos;,&apos;高等数学&apos;,&apos;岩浆岩岩石学&apos;,
+         &apos;线性代数&apos;,&apos;概率论&apos;,&apos;运筹学&apos;]
+    for name in c_names:
+        cou = Course()
+        cou.c_name=name
+        cou.save()
+    return HttpResponse(&apos;添加课程成功&apos;)
+</code></pre><h2 id="13通过中间表添加删除学生或者课程"><a href="#13通过中间表添加删除学生或者课程" class="headerlink" title="13通过中间表添加删除学生或者课程"></a>13通过中间表添加删除学生或者课程</h2><h3 id="13-1给学生添加课程"><a href="#13-1给学生添加课程" class="headerlink" title="13.1给学生添加课程"></a>13.1给学生添加课程</h3><pre><code>def add_s_c(request):
+    cou=Course.objects.get(c_name=&apos;高等数学&apos;)
+    stu=Student.objects.get(s_name=&apos;妲己&apos;)
+    stu.course_set.add(cou)
+    return HttpResponse(&apos;添加中间表成功&apos;)
+</code></pre><h3 id="13-2给课程添加学生"><a href="#13-2给课程添加学生" class="headerlink" title="13.2给课程添加学生"></a>13.2给课程添加学生</h3><pre><code>def add_s_c(request):
+    cou=Course.objects.get(c_name=&apos;高等数学&apos;)
+    stu=Student.objects.get(s_name=&apos;妲己&apos;)
+    cou.stu(学生模型中反向引用符).add(stu(学生对象))
+    return HttpResponse(&apos;添加中间表成功&apos;)
+</code></pre><h3 id="13-3学生删除课程"><a href="#13-3学生删除课程" class="headerlink" title="13.3学生删除课程"></a>13.3学生删除课程</h3><pre><code>def add_s_c(request):
+    cou=Course.objects.get(c_name=&apos;高等数学&apos;)
+    stu=Student.objects.get(s_name=&apos;妲己&apos;)
+    stu.course_set.remove(cou)
+    return HttpResponse(&apos;添加中间表成功&apos;)
+</code></pre><h2 id="14前端设计"><a href="#14前端设计" class="headerlink" title="14前端设计"></a>14前端设计</h2><h3 id="14-1配置"><a href="#14-1配置" class="headerlink" title="14.1配置"></a>14.1配置</h3><p>在settings.py文件中定义TEMPALTES的目录地址第58行添加如下文字：’DIRS’: [os.path.join(BASE_DIR,’templates’)],<br>os.path.join(BASE_DIR,’templates’)中BASE_DIR表示第16行的BASE_DIR获取到的文件位置，templates表示含有网页文件的文件夹；os.path.join（’a’,’b’）表示文件路径：a//b</p>
+<h3 id="14-2后端渲染模板"><a href="#14-2后端渲染模板" class="headerlink" title="14.2后端渲染模板"></a>14.2后端渲染模板</h3><p>使用render()渲染模板<br>传递参数给模板,render(request,模板名,{key1:value1,key2:value2})</p>
+<pre><code>from django.shortcuts import render
+def index(request):
+    stus=Student.objects.all()
+    return render(request,&apos;index.html&apos;,{&apos;a&apos;:stus})
+</code></pre><h3 id="14-3前端渲染模板"><a href="#14-3前端渲染模板" class="headerlink" title="14.3前端渲染模板"></a>14.3前端渲染模板</h3><pre><code>1.解析变量：{{变量}}
+2.解析标签：{% 标签 %}{% endfor标签 %}    
+{{ a }} #解析变量
+&lt;br&gt; #换行标签
+{% for stu in a %} #for标签
+	      <p>姓名：{{ stu.s_name }}
+	          年龄：{{ stu.s_age }}
+	          班级：{{ stu.g.g_name }}
+	          选课：
+	          {% for c in stu.course_set.all %}
+	              {{ c.c_name }}
+	              {% endfor %}
+    &lt;/p&gt;
+{% endfor %} #结束标签
+</p></code></pre>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/04/模型设计/">
+    <time datetime="2019-01-04T12:32:25.000Z" class="entry-date">
+        2019-01-04
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2019/01/03/模型关系映射/" rel="next">模型关系映射 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/04/模型设计/">模型设计</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/03/模型关系映射/">模型关系映射</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/02/django环境搭建/">django环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/">redis数据库主要语法-及与mysql结合用法示例</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/20/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    <aside class="widget">
+    <h3 class="widget-title">关于我</h3>
+    <div class="widget-content">
+      <p>邮箱：huyifi@163.com</p>
+      <p>QQ：1838267371</p>
+      
+    </div>
+</aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget-content">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+      <audio src="https://img.hacpai.com/file/2018/11/karera_wo_tame_no_koushinnkyoku-95a27a16.mp3" controls="controls" style="width:100%">
+        您的浏览器不支持 audio 标签。
+      </audio>
+    </div>
+  </aside>
+
+  
+    <script>
+    // sub title
+    var subtitleList = [
+        "『不懂形式语言就是不懂语言。』——沃·兹基硕德",
+        "『涉及到物理实体的项目，必须要仔细论证。』——沃·兹基硕德",
+        "『你有无知的权利，也有发表看法的权利，但是没有「无知 && 发表看法」的权利。』——沃·兹基硕德",
+        "『韮之大者，高位接盘！』——沃·兹基硕德",
+        "『卑鄙是卑鄙者的通行证，高尚是高尚者的墓志铭。』——北岛",
+        "『邪人用正法亦邪，正人用邪法亦正。』——谚语",
+        "『坦白从宽牢底坐穿，抗拒从严回家过年。』——谚语",
+        "『Stay young. Stay simple. Always naive!』——谚语",
+        "『3D 打印领域急需一场开源运动。』——沃·兹基硕德",
+        "『你们媒体千万要记着，不要「见得风，是得雨」。接到消息，你们媒体本身也要判断。』——长者",
+        "『假设这些完全无中生有的东西，你再帮他说一遍，你等于......你也有责任吧？』——长者",
+        "『刚才你问我啊，我可以回答你一句「无可奉告」。』——长者",
+        "『我告诉你们我是身经百战了，见得多了！』——长者",
+        "『美国的华莱士，比你们不知要高到哪里去了，我跟他谈笑风生。』——长者",
+        "『我有这个必要告诉你们一点，人生的经验。』——长者",
+        "『我没有说要钦定，没有任何这个意思。』——长者",
+        "『你们啊，不要想喜欢弄个大新闻，说现在已经钦定了，就把我批判一番。』——长者",
+        "『一个人的命运啊，当然要靠自我奋斗，但是也要考虑历史的进程。』——长者",
+        "『我说另请高明吧，我实在也不是谦虚。』——长者",
+        "『苟利国家生死以，岂因祸福避趋之。』——林则徐《赴戍登程口占示家人二首》",
+        "『敢同恶鬼争高下，不向霸王让寸分。』——毛泽东《七律·庆祝第二次核试验成功》",
+        "『我生不为逐鹿来，都门懒筑黄金台。状元百官都如狗，总是刀下觳觫材。』——张献忠《七杀诗》",
+        "『一泓海水杯中泻，更变千年如走马。』——李贺《梦天》",
+    ];
+    
+    document.addEventListener('DOMContentLoaded', evt => {
+        var i = Math.floor(Math.random() * subtitleList.length);
+        document.querySelector('#subtitle').innerText = subtitleList[i];
+    });
+
+    //Kill XP and IE8
+    (function(){
+        var ua = navigator.userAgent;
+        var res = /Windows NT (\d+\.\d+)/.exec(ua);
+        var xpOrLower = res && JSON.parse(res[1]) < 6;
+        res = /MSIE (\d+\.\d+)/.exec(ua);
+        var ie8OrLower = res && JSON.parse(res[1]) < 9;
+        if(xpOrLower || ie8OrLower) {
+            alert('请不要用XP及之前的Windows系统，和IE8及之前的IE浏览器访问本站！');
+            location.href = "about:blank";
+        }
+        var fromBaiduSE = /^https?:\/\/www.baidu.com/.test(document.referrer);
+        if(fromBaiduSE) {
+            alert('检测到你还在使用百度搜索，作为一个程序员，这是一种自暴自弃！\n\n做不作恶的程序员，从不用百度开始！');
+            location.href = "about:blank";
+        }
+    })();
+</script>
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 hyf</p>
+    <p>All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
