@@ -25,7 +25,7 @@
 <meta property="og:site_name" content="玄武岩">
 <meta property="og:description" content="导入函数或者文件方法：先写一个函数名或者其他，然后按alt+enterctrl+d 快速复制当前行并粘贴到下一行ctrl+y 删除当前行模型层 ORM技术:对象关系映射  —objects relationship mapping对象关系映射：将模型中的语句映射为数据库中的语句，可以通过编写模型中的语句对数据库(多种)进行操作objects：管理器，默认模型的属性在orm技术中，pk代表表格的主键">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-03T12:23:05.994Z">
+<meta property="og:updated_time" content="2019-01-04T01:27:57.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模型关系映射">
 <meta name="twitter:description" content="导入函数或者文件方法：先写一个函数名或者其他，然后按alt+enterctrl+d 快速复制当前行并粘贴到下一行ctrl+y 删除当前行模型层 ORM技术:对象关系映射  —objects relationship mapping对象关系映射：将模型中的语句映射为数据库中的语句，可以通过编写模型中的语句对数据库(多种)进行操作objects：管理器，默认模型的属性在orm技术中，pk代表表格的主键">
@@ -89,7 +89,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqgl28w500038ouruob2799m" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqhd5pra0001z8urme333y58" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -185,7 +185,7 @@ stus = Student.objects.filter(Q(s_age__gte=21) &amp; Q(s_age__lte=23))
 </code></pre><h4 id="4-11-2或"><a href="#4-11-2或" class="headerlink" title="4.11.2或"></a>4.11.2或</h4><pre><code>stus = Student.objects.filter(Q(s_age__gte=21) or Q(s_age__lte=23))
 stus = Student.objects.filter(Q(s_age__gte=21) | Q(s_age__lte=23))
 </code></pre><h4 id="4-11-3非"><a href="#4-11-3非" class="headerlink" title="4.11.3非"></a>4.11.3非</h4><pre><code>stus = Student.objects.filter(~Q(s_age__gte=21))
-</code></pre><h4 id="4-11-4对象属性比较"><a href="#4-11-4对象属性比较" class="headerlink" title="4.11.4对象属性比较"></a>4.11.4对象属性比较</h4><p>查询物理成绩大于数学成绩的学生</p>
+</code></pre><h4 id="4-11-4对象字段比较F（）方法"><a href="#4-11-4对象字段比较F（）方法" class="headerlink" title="4.11.4对象字段比较F（）方法"></a>4.11.4对象字段比较F（）方法</h4><p>查询物理成绩大于数学成绩的学生</p>
 <pre><code>stus = Student.objects.all()
 for stu in stus:
     if (stu.wuli &gt; stu.math):
@@ -258,10 +258,6 @@ for stu in stus:
           </li>
         
           <li>
-            <a href="/2018/12/20/新建博客/">新建博客</a>
-          </li>
-        
-          <li>
             <a href="/2018/12/20/hello-world/">Hello World</a>
           </li>
         
@@ -283,7 +279,7 @@ for stu in stus:
   <aside class="widget">
     <h3 class="widget-title">Archives</h3>
     <div class="widget-content">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </aside>
 
