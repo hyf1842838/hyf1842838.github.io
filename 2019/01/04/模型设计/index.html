@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="玄武岩">
 <meta property="og:description" content="1模型设计部分参数1.1迁移表中db_table指定db_table参数，表示模型迁移时，映射到数据库中的表名称如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名 1.2模型中的外键约束中的on_delete参数on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）on_delete=models.PROTECT：不让删主表">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-04T15:32:04.636Z">
+<meta property="og:updated_time" content="2019-01-05T03:56:55.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模型设计">
 <meta name="twitter:description" content="1模型设计部分参数1.1迁移表中db_table指定db_table参数，表示模型迁移时，映射到数据库中的表名称如果没指定db_table参数，则数据库中模型映射的表名为：应用名(app)_模型名 1.2模型中的外键约束中的on_delete参数on_delete=models.CASCADE:不能删除主表，从表相应数据可以被删除（默认）on_delete=models.PROTECT：不让删主表">
@@ -90,7 +90,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqi88etv0004tour7we1uulr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqj8h4y30003bwurmi8biy4i" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -241,7 +241,13 @@ def index(request):
                 {% endfor %}
     &lt;/p&gt;
 {% endfor %} #结束标签
-</p></code></pre>
+</p></code></pre><h2 id="15总结"><a href="#15总结" class="headerlink" title="15总结"></a>15总结</h2><h3 id="15-1聚合函数及模糊查询"><a href="#15-1聚合函数及模糊查询" class="headerlink" title="15.1聚合函数及模糊查询"></a>15.1聚合函数及模糊查询</h3><p>聚合函数(Avg,Max,Sum,Count)的使用<br>模型名.objects.筛选条件.aggregate(聚合函数(‘聚合条件’))<br>模糊查询（contains、startswith及endswith）<br>模型名.objects.filter(查询字段__startswith=’查询内容’)</p>
+<h3 id="15-2related-name参数"><a href="#15-2related-name参数" class="headerlink" title="15.2related_name参数"></a>15.2related_name参数</h3><p>模型中外键约束中的related_name参数：<br>related_name:关联对象反向引用描述符；当为一对一关系时，related_name参数默认为对应模型的模型名全小写；当为一对多或者多对多关系时，默认为对应模型的模型名小写_set</p>
+<h3 id="15-3用主表给从表关联字段赋值"><a href="#15-3用主表给从表关联字段赋值" class="headerlink" title="15.3用主表给从表关联字段赋值"></a>15.3用主表给从表关联字段赋值</h3><p>当用主表中的信息(主键)给从表的关联字段(外键)赋值时：<br>从表对象.关联字段=主表对象(主表对象要唯一) 或者 从表对象.关联字段_id=要赋的主表对象对应的主键具体值</p>
+<h3 id="15-4不用related-name用主表查从表"><a href="#15-4不用related-name用主表查从表" class="headerlink" title="15.4不用related_name用主表查从表"></a>15.4不用related_name用主表查从表</h3><p>当不用related_name参数查询时：<br>当用主表查从表时（无关联参数的一方查有关联参数的一方），先生成主表对象；然后从表对象=从表模型名.objects.filter(关联字段=主表对象/关联字段_id=主表对象.id).first()</p>
+<h3 id="15-5用related-name查询"><a href="#15-5用related-name查询" class="headerlink" title="15.5用related_name查询"></a>15.5用related_name查询</h3><p>当用related_name参数查询时：<br>当用主表查从表时（无关联参数的一方查有关联参数的一方），需要用related_name参数生成从表对象(从表对象=主表对象.related_name参数/当为一对多关系时，还要在后面接上.all()才是查询集集合)<br>当用从表查主表时（有关联参数的一方查无关联参数的一方），直接用关联字段生成主表对象(主表对象=从表对象.关联字段)</p>
+<h3 id="15-6多对多中间表数据的添加与删除"><a href="#15-6多对多中间表数据的添加与删除" class="headerlink" title="15.6多对多中间表数据的添加与删除"></a>15.6多对多中间表数据的添加与删除</h3><p>当为多(M)对多(N)关系时：<br>往中间表中添加数据：M对象.N的related_name参数.add(N对象)<br>在中间表中删除数据：M对象.N的related_name参数.remove(N对象)</p>
+
       
     </div><!-- .entry-content -->
 

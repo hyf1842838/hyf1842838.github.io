@@ -85,7 +85,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqi88etv0004tour7we1uulr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqj8h4y30003bwurmi8biy4i" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -236,7 +236,13 @@ def index(request):
                 {% endfor %}
     &lt;/p&gt;
 {% endfor %} #结束标签
-</p></code></pre>
+</p></code></pre><h2 id="15总结"><a href="#15总结" class="headerlink" title="15总结"></a>15总结</h2><h3 id="15-1聚合函数及模糊查询"><a href="#15-1聚合函数及模糊查询" class="headerlink" title="15.1聚合函数及模糊查询"></a>15.1聚合函数及模糊查询</h3><p>聚合函数(Avg,Max,Sum,Count)的使用<br>模型名.objects.筛选条件.aggregate(聚合函数(‘聚合条件’))<br>模糊查询（contains、startswith及endswith）<br>模型名.objects.filter(查询字段__startswith=’查询内容’)</p>
+<h3 id="15-2related-name参数"><a href="#15-2related-name参数" class="headerlink" title="15.2related_name参数"></a>15.2related_name参数</h3><p>模型中外键约束中的related_name参数：<br>related_name:关联对象反向引用描述符；当为一对一关系时，related_name参数默认为对应模型的模型名全小写；当为一对多或者多对多关系时，默认为对应模型的模型名小写_set</p>
+<h3 id="15-3用主表给从表关联字段赋值"><a href="#15-3用主表给从表关联字段赋值" class="headerlink" title="15.3用主表给从表关联字段赋值"></a>15.3用主表给从表关联字段赋值</h3><p>当用主表中的信息(主键)给从表的关联字段(外键)赋值时：<br>从表对象.关联字段=主表对象(主表对象要唯一) 或者 从表对象.关联字段_id=要赋的主表对象对应的主键具体值</p>
+<h3 id="15-4不用related-name用主表查从表"><a href="#15-4不用related-name用主表查从表" class="headerlink" title="15.4不用related_name用主表查从表"></a>15.4不用related_name用主表查从表</h3><p>当不用related_name参数查询时：<br>当用主表查从表时（无关联参数的一方查有关联参数的一方），先生成主表对象；然后从表对象=从表模型名.objects.filter(关联字段=主表对象/关联字段_id=主表对象.id).first()</p>
+<h3 id="15-5用related-name查询"><a href="#15-5用related-name查询" class="headerlink" title="15.5用related_name查询"></a>15.5用related_name查询</h3><p>当用related_name参数查询时：<br>当用主表查从表时（无关联参数的一方查有关联参数的一方），需要用related_name参数生成从表对象(从表对象=主表对象.related_name参数/当为一对多关系时，还要在后面接上.all()才是查询集集合)<br>当用从表查主表时（有关联参数的一方查无关联参数的一方），直接用关联字段生成主表对象(主表对象=从表对象.关联字段)</p>
+<h3 id="15-6多对多中间表数据的添加与删除"><a href="#15-6多对多中间表数据的添加与删除" class="headerlink" title="15.6多对多中间表数据的添加与删除"></a>15.6多对多中间表数据的添加与删除</h3><p>当为多(M)对多(N)关系时：<br>往中间表中添加数据：M对象.N的related_name参数.add(N对象)<br>在中间表中删除数据：M对象.N的related_name参数.remove(N对象)</p>
+
       
     </div><!-- .entry-content -->
 
@@ -272,7 +278,7 @@ def index(request):
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqi88etj0002tour8299vd8b" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqj8h4xt0002bwurhxjwuysd" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -417,7 +423,7 @@ for stu in stus:
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqi88et10000tourjvnv2twz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqj8h4t50000bwurae1st4hb" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -523,7 +529,7 @@ class Student(models.Model):
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/" data-id="cjqi88ets0003tourgkcefrg8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/" data-id="cjqj8h4y60004bwurnbg8xvsm" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -729,7 +735,7 @@ def my_dis():
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqi88etd0001tourafzooylk" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqj8h4x20001bwurskbmz6r8" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
