@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="1请求方式请求方式有get和post两种方式；数据查询用get请求数据操作（增、删及改操作）用post请求
+1.1参数类型传参GET：获取get请求传递的参数（request.GET[‘key’]/request.GET.get(‘key’)）传参POST：获取post请求传递的参数（request">
+  
+
+  
+  
+  <meta name="google-site-verification" content="NCXVSqxqB-os803-VFMtIEd1SUNJVOIjctCfNYUwD0w">
+  <meta name="baidu-site-verification" content="Nzwx7HuplM">
+  
+  <meta name="msvalidate.01" content="9E9EA92F7E5327E1FE8A5196D5253664">
+  
+  
+  
+  <title>cookie及session | 玄武岩</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1请求方式请求方式有get和post两种方式；数据查询用get请求数据操作（增、删及改操作）用post请求 1.1参数类型传参GET：获取get请求传递的参数（request.GET[‘key’]/request.GET.get(‘key’)）传参POST：获取post请求传递的参数（request.POST[‘key’]/request.POST.get(‘key’)）传参FILES：获取上传的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cookie及session">
+<meta property="og:url" content="http://yoursite.com/2019/01/08/cookie及session/index.html">
+<meta property="og:site_name" content="玄武岩">
+<meta property="og:description" content="1请求方式请求方式有get和post两种方式；数据查询用get请求数据操作（增、删及改操作）用post请求 1.1参数类型传参GET：获取get请求传递的参数（request.GET[‘key’]/request.GET.get(‘key’)）传参POST：获取post请求传递的参数（request.POST[‘key’]/request.POST.get(‘key’)）传参FILES：获取上传的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-08T11:34:26.897Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cookie及session">
+<meta name="twitter:description" content="1请求方式请求方式有get和post两种方式；数据查询用get请求数据操作（增、删及改操作）用post请求 1.1参数类型传参GET：获取get请求传递的参数（request.GET[‘key’]/request.GET.get(‘key’)）传参POST：获取post请求传递的参数（request.POST[‘key’]/request.POST.get(‘key’)）传参FILES：获取上传的">
+  
+  
+    <link rel="icon" href="http://7u2hdm.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="玄武岩" rel="home">玄武岩</a>
+      </h1>
+      
+        <script type="text/javascript" src="http://api.hitokoto.us/rand?encode=js&charset=utf-8"></script>
+        <h2 class="site-description"><script>hitokoto();</script></h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://it-ebooks.flygon.net/">电子书</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/makes">MAKES</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about">关于我</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/atom.xml">RSS</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://github.com/hyf1842838/blog">fork me on github</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-cookie及session" class="post-cookie及session post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      cookie及session
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/08/cookie及session/" data-id="cjqnsax5b000440urk11ro82p" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h2 id="1请求方式"><a href="#1请求方式" class="headerlink" title="1请求方式"></a>1请求方式</h2><p>请求方式有get和post两种方式；<br>数据查询用get请求<br>数据操作（增、删及改操作）用post请求</p>
+<h2 id="1-1参数类型"><a href="#1-1参数类型" class="headerlink" title="1.1参数类型"></a>1.1参数类型</h2><p>传参GET：获取get请求传递的参数（request.GET[‘key’]/request.GET.get(‘key’)）<br>传参POST：获取post请求传递的参数（request.POST[‘key’]/request.POST.get(‘key’)）<br>传参FILES：获取上传的文件、图片等内容（request.FILES[‘key’]/request.FILES.get(‘key’)）<br>路径path：获取当前请求的路径（request.path）<br>COOKIES：存储网站的一些基本信息：如登陆的信息（request.COOKIES[‘key’]/request.COOKIES.get(‘key’)）<br>COOKIES存储的内容是存储在客户端（浏览器）</p>
+<h2 id="2响应response"><a href="#2响应response" class="headerlink" title="2响应response"></a>2响应response</h2><p>HttpResponse：响应字符串<br>JsonResponse：响应json，用于ajax异步请求<br>render：响应页面<br>HttpResponseRedirect：跳转<br>  第一种，硬编码跳转：HttpResponseRedirect(‘/app/index/1/‘)<br>  第二种,重命名跳转：HttpResponseRedirect(reverse(‘user:login’))</p>
+<pre><code>{% block content %}
+        <form action="" method="post">
+            <p>姓名:<input type="text" name="username"></p>
+            <p>密码:<input type="text" name="password"></p>
+            <p><input type="submit" value="提交"></p>
+        </form>
+    {% endblock %}
+</code></pre><p>action中写地址就提交到写的地址，如果不写，就提交到当前地址。<br>在测试时，先注释settings中的47行，获取权限。</p>
+<h3 id="2-1给路由重命名"><a href="#2-1给路由重命名" class="headerlink" title="2.1给路由重命名"></a>2.1给路由重命名</h3><pre><code>给工程下的app路由重命名
+path(&apos;app/&apos;, include((&apos;app.urls&apos;, &apos;app&apos;), namespace=&apos;new_name&apos;)),
+path(&apos;user/&apos;, include((&apos;user.urls&apos;, &apos;user&apos;), namespace=&apos;user&apos;))
+
+给应用下的路由重命名
+path(&apos;hindex/&lt;int:id&gt;/&apos;, views.hindex, name=&apos;new_index&apos;),
+
+
+def hindex(request):
+    if request.method == &apos;GET&apos;:
+        return HttpResponseRedirect(reverse(&apos;new_name:new_index&apos;, kwargs={&apos;id&apos;: 2})) #响应跳转
+    elif request.method == &apos;POST&apos;:
+        pass
+</code></pre><h2 id="3登陆"><a href="#3登陆" class="headerlink" title="3登陆"></a>3登陆</h2><h3 id="3-1render和redirect的区别"><a href="#3-1render和redirect的区别" class="headerlink" title="3.1render和redirect的区别"></a>3.1render和redirect的区别</h3><p>render是将变量渲染到当前页面中；<br>而redirect是HTTP中的1个跳转的函数,一般会生成302状态码，是直接跳转到一个新的页面</p>
+<pre><code>return render(request, &apos;login.html&apos;)
+return HttpResponseRedirect(reverse(&apos;user:login&apos;))
+</code></pre><h3 id="3-2登陆"><a href="#3-2登陆" class="headerlink" title="3.2登陆"></a>3.2登陆</h3><p>res.set_cookie(‘token’, token, max_age=30)将变量token的值作为值赋给键token，生成一个存在时间为30秒的cookie<br>check_password(password,user.password),返回布尔值;用输入的密码跟数据库存储的密码进行比较是否相同<br> random.choice(s) 从变量s中随机取一个字符<br>获取登陆提交的参数：<br>username = request.POST.get(‘username’)<br>password = request.POST.get(‘password’)<br>cookie：产生背景：由于http无状态协议，导致后端无法知道当前发送请求的人是谁，用于存储一些不是很重要的内容；<br>存储：set_cookie(key,value,max_age/expris(存储时间秒/存储到的日期))<br>删除：delete_cookie(key)</p>
+<pre><code>def login(request):
+    if request.method == &apos;GET&apos;:
+        return render(request, &apos;login.html&apos;)
+    if request.method == &apos;POST&apos;:
+         获取登陆提交的参数
+        username = request.POST.get(&apos;username&apos;)
+        password = request.POST.get(&apos;password&apos;)
+        user = User.objects.filter(username=username).first()
+        校验密码          
+        if check_password(password, user.password):
+             模拟登陆成功，跳转至指定页面
+            res = HttpResponseRedirect(reverse(&apos;user:index&apos;))
+            设置cookie
+            s = &apos;0123456789abcdefg&apos;
+            token = &apos;&apos;
+            for i in range(20):
+                token += random.choice(s) #从s中随机取字符生成cookie
+            res.set_cookie(&apos;token&apos;, token, max_age=30)
+            删除之前的cookie
+            UserToken.objects.filter(user_id=user.id).delete()
+            保存新的token到user_token表中
+            UserToken.objects.create(user_id=user.id, token=token)
+            return res
+        else:
+            登陆失败
+            return HttpResponseRedirect(reverse(&apos;user:login&apos;))
+</code></pre><h2 id="4主页"><a href="#4主页" class="headerlink" title="4主页"></a>4主页</h2><p>从cookies中获取登陆校验的token值<br>token = request.COOKIES.get(‘token’)</p>
+<pre><code>def index(request):
+    if request.method == &apos;GET&apos;:
+        从cookies中获取登陆校验的token值
+        token = request.COOKIES.get(&apos;token&apos;)
+        判断token是否存在，如果不存在说明没有登陆或登陆失效
+        if not token:
+            return HttpResponseRedirect(reverse(&apos;user:login&apos;))
+        user_token = UserToken.objects.filter(token=token).first()
+        判断user_token表中是否存在token值，如果不存在，表示用户没有登陆
+        if not user_token:
+            return HttpResponseRedirect(reverse(&apos;user:login&apos;))
+        else:
+            return render(request, &apos;index.html&apos;)
+</code></pre><h2 id="5退出"><a href="#5退出" class="headerlink" title="5退出"></a>5退出</h2><p>删除cookie中的键值对：res.delete_cookie(‘token’)</p>
+<pre><code>def logout(request):
+    if request.method == &apos;GET&apos;:
+       注销(删除cookie中的键值对)
+        res = HttpResponseRedirect(reverse(&apos;user:login&apos;))
+        res.delete_cookie(&apos;token&apos;)
+        return res
+</code></pre><h2 id="6注册"><a href="#6注册" class="headerlink" title="6注册"></a>6注册</h2><pre><code>def register(request):
+    if request.method == &apos;GET&apos;:
+        return render(request, &apos;register.html&apos;)
+    if request.method == &apos;POST&apos;:
+        1.接收页面中传递的参数
+        username = request.POST.get(&apos;username&apos;)
+        password = request.POST.get(&apos;password&apos;)
+        password2 = request.POST.get(&apos;password2&apos;)
+        2.实现保存用户信息到user表中
+        if User.objects.filter(username=username).exists():
+            msg = &apos;账号已存在&apos;
+            return render(request, &apos;register.html&apos;, {&apos;msg&apos;: msg})
+        elif password != password2:
+            msg = &apos;密码不一致&apos;
+            return render(request, &apos;register.html&apos;, {&apos;msg&apos;: msg})
+        3注册
+        else:
+            password = make_password(password) # 对密码进行加密
+            User.objects.create(username=username, password=password)
+            4跳转到登陆
+            return HttpResponseRedirect(reverse(&apos;user:login&apos;))
+            # return render(request, &apos;login.html&apos;)
+</code></pre><h2 id="7用session实现登陆操作"><a href="#7用session实现登陆操作" class="headerlink" title="7用session实现登陆操作"></a>7用session实现登陆操作</h2><h3 id="7-1session作用"><a href="#7-1session作用" class="headerlink" title="7.1session作用"></a>7.1session作用</h3><p>1.向cookie中保存键值对，键为sessionid(存在浏览器中)<br>2.向django_session表中保存sessionid值(保存在session_data中)<br>3.向django_session表中存键值对{‘username’:coco}</p>
+<h3 id="7-2session用法"><a href="#7-2session用法" class="headerlink" title="7.2session用法"></a>7.2session用法</h3><p>产生背景，由于cookie中存储空间有限，很容易被截取，因此cookie存重要内容不安全，需要使用session进行数据存储<br>向session中存数据:request.session[key]=value<br>从session中取数据:request.session[‘key’]或request.session.get(‘key’)<br>删除cookie和session中的所有信息：request.session.flush()（推荐）<br>删除user_id中的键值对:del request.session[‘user_id’]</p>
+<pre><code>def my_login(request):
+    if request.method == &apos;GET&apos;:
+        return render(request, &apos;login.html&apos;)
+    if request.method == &apos;POST&apos;:
+        username = request.POST.get(&apos;username&apos;)
+        password = request.POST.get(&apos;password&apos;)
+        user = User.objects.filter(username=username).first()
+        if check_password(password, user.password):
+            向session中存数据，将user.id保存在user_id键中
+            request.session[&apos;user_id&apos;] = user.id
+            return HttpResponseRedirect(reverse(&apos;user:hindex&apos;))
+        else:
+            msg = &apos;账号或者密码错误&apos;
+            return render(request, &apos;login.html&apos;, {&apos;msg&apos;: msg})
+</code></pre><h2 id="8用session获取当前登陆用户信息"><a href="#8用session获取当前登陆用户信息" class="headerlink" title="8用session获取当前登陆用户信息"></a>8用session获取当前登陆用户信息</h2><pre><code>def hindex(request):
+    if request.method == &apos;GET&apos;:
+        从session中取数据
+        user_id = request.session[&apos;user_id&apos;]
+        user = User.objects.get(pk=user_id)
+        print(&apos;当前登陆系统的人为:%s&apos; % user.username)
+        return render(request, &apos;index.html&apos;)
+    else:
+        return render(request, &apos;login.html&apos;)
+</code></pre><h2 id="9用session退出"><a href="#9用session退出" class="headerlink" title="9用session退出"></a>9用session退出</h2><p>退出登陆可以用以下方法实现<br>删除cookie中的sessionid值<br>删除django_session表中的数据<br>删除django_session表中的session_data中的user_id<br>以上三种方法都可以实现退出操作</p>
+<pre><code>def my_logout(request):
+    if request.method == &apos;GET&apos;:
+        request.session.flush()
+        # del request.session[&apos;user_id&apos;]
+        return HttpResponseRedirect(reverse(&apos;user:my_login&apos;))
+</code></pre>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/08/cookie及session/">
+    <time datetime="2019-01-08T11:32:25.000Z" class="entry-date">
+        2019-01-08
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2019/01/07/模板设计/" rel="next">模板设计 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/08/cookie及session/">cookie及session</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/07/模板设计/">模板设计</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/04/模型设计/">模型设计</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/03/模型关系映射/">模型关系映射</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/02/django环境搭建/">django环境搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    <aside class="widget">
+    <h3 class="widget-title">关于我</h3>
+    <div class="widget-content">
+      <p>邮箱：huyifi@163.com</p>
+      <p>QQ：1838267371</p>
+      
+    </div>
+</aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget-content">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+      <audio src="https://img.hacpai.com/file/2018/11/karera_wo_tame_no_koushinnkyoku-95a27a16.mp3" controls="controls" style="width:100%">
+        您的浏览器不支持 audio 标签。
+      </audio>
+    </div>
+  </aside>
+
+  
+    <script>
+    // sub title
+    var subtitleList = [
+        "『不懂形式语言就是不懂语言。』——沃·兹基硕德",
+        "『涉及到物理实体的项目，必须要仔细论证。』——沃·兹基硕德",
+        "『你有无知的权利，也有发表看法的权利，但是没有「无知 && 发表看法」的权利。』——沃·兹基硕德",
+        "『韮之大者，高位接盘！』——沃·兹基硕德",
+        "『卑鄙是卑鄙者的通行证，高尚是高尚者的墓志铭。』——北岛",
+        "『邪人用正法亦邪，正人用邪法亦正。』——谚语",
+        "『坦白从宽牢底坐穿，抗拒从严回家过年。』——谚语",
+        "『Stay young. Stay simple. Always naive!』——谚语",
+        "『3D 打印领域急需一场开源运动。』——沃·兹基硕德",
+        "『你们媒体千万要记着，不要「见得风，是得雨」。接到消息，你们媒体本身也要判断。』——长者",
+        "『假设这些完全无中生有的东西，你再帮他说一遍，你等于......你也有责任吧？』——长者",
+        "『刚才你问我啊，我可以回答你一句「无可奉告」。』——长者",
+        "『我告诉你们我是身经百战了，见得多了！』——长者",
+        "『美国的华莱士，比你们不知要高到哪里去了，我跟他谈笑风生。』——长者",
+        "『我有这个必要告诉你们一点，人生的经验。』——长者",
+        "『我没有说要钦定，没有任何这个意思。』——长者",
+        "『你们啊，不要想喜欢弄个大新闻，说现在已经钦定了，就把我批判一番。』——长者",
+        "『一个人的命运啊，当然要靠自我奋斗，但是也要考虑历史的进程。』——长者",
+        "『我说另请高明吧，我实在也不是谦虚。』——长者",
+        "『苟利国家生死以，岂因祸福避趋之。』——林则徐《赴戍登程口占示家人二首》",
+        "『敢同恶鬼争高下，不向霸王让寸分。』——毛泽东《七律·庆祝第二次核试验成功》",
+        "『我生不为逐鹿来，都门懒筑黄金台。状元百官都如狗，总是刀下觳觫材。』——张献忠《七杀诗》",
+        "『一泓海水杯中泻，更变千年如走马。』——李贺《梦天》",
+    ];
+    
+    document.addEventListener('DOMContentLoaded', evt => {
+        var i = Math.floor(Math.random() * subtitleList.length);
+        document.querySelector('#subtitle').innerText = subtitleList[i];
+    });
+
+    //Kill XP and IE8
+    (function(){
+        var ua = navigator.userAgent;
+        var res = /Windows NT (\d+\.\d+)/.exec(ua);
+        var xpOrLower = res && JSON.parse(res[1]) < 6;
+        res = /MSIE (\d+\.\d+)/.exec(ua);
+        var ie8OrLower = res && JSON.parse(res[1]) < 9;
+        if(xpOrLower || ie8OrLower) {
+            alert('请不要用XP及之前的Windows系统，和IE8及之前的IE浏览器访问本站！');
+            location.href = "about:blank";
+        }
+        var fromBaiduSE = /^https?:\/\/www.baidu.com/.test(document.referrer);
+        if(fromBaiduSE) {
+            alert('检测到你还在使用百度搜索，作为一个程序员，这是一种自暴自弃！\n\n做不作恶的程序员，从不用百度开始！');
+            location.href = "about:blank";
+        }
+    })();
+</script>
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 hyf</p>
+    <p>All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

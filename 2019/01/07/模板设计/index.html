@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   
   
+  <meta name="description" content="1引入静态文件在settings中对最后的STATIC_URL进行如下设置
+STATIC_URL = &amp;apos;/static/&amp;apos;
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, &amp;apos;static&amp;apos;)
+]
+在新建的html">
+  
 
   
   
@@ -14,15 +21,19 @@
   
   
   
-  <title>Archives | 玄武岩</title>
+  <title>模板设计 | 玄武岩</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="玄武岩">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="1引入静态文件在settings中对最后的STATIC_URL进行如下设置 STATIC_URL = &amp;apos;/static/&amp;apos; STATICFILES_DIRS = [     os.path.join(BASE_DIR, &amp;apos;static&amp;apos;) ] 在新建的html文件中导入设置的样式表的方法有三种；方法一 &amp;lt;link rel=&amp;quot;styleshee">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模板设计">
+<meta property="og:url" content="http://yoursite.com/2019/01/07/模板设计/index.html">
 <meta property="og:site_name" content="玄武岩">
+<meta property="og:description" content="1引入静态文件在settings中对最后的STATIC_URL进行如下设置 STATIC_URL = &amp;apos;/static/&amp;apos; STATICFILES_DIRS = [     os.path.join(BASE_DIR, &amp;apos;static&amp;apos;) ] 在新建的html文件中导入设置的样式表的方法有三种；方法一 &amp;lt;link rel=&amp;quot;styleshee">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-08T13:21:34.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="玄武岩">
+<meta name="twitter:title" content="模板设计">
+<meta name="twitter:description" content="1引入静态文件在settings中对最后的STATIC_URL进行如下设置 STATIC_URL = &amp;apos;/static/&amp;apos; STATICFILES_DIRS = [     os.path.join(BASE_DIR, &amp;apos;static&amp;apos;) ] 在新建的html文件中导入设置的样式表的方法有三种；方法一 &amp;lt;link rel=&amp;quot;styleshee">
   
   
     <link rel="icon" href="http://7u2hdm.com1.z0.glb.clouddn.com/favicon.ico">
@@ -68,53 +79,127 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-模板设计" class="post-模板设计 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2019/01/08/cookie及session/">cookie及session</a>
+    <h1 class="entry-title article-title">
+      模板设计
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2019/01/08/cookie及session/">
-    <time datetime="2019-01-08T11:32:25.000Z" class="entry-date">
-        2019-01-08
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2019/01/07/模板设计/">模板设计</a>
-    </h1>
-  
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/07/模板设计/" data-id="cjqnsax52000340urw6xhefcu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
 
-  </header>
-  <footer class="entry-meta">
+    <div class="entry-content">
+      
+        <h2 id="1引入静态文件"><a href="#1引入静态文件" class="headerlink" title="1引入静态文件"></a>1引入静态文件</h2><p>在settings中对最后的STATIC_URL进行如下设置</p>
+<pre><code>STATIC_URL = &apos;/static/&apos;
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, &apos;static&apos;)
+]
+</code></pre><p>在新建的html文件中导入设置的样式表的方法有三种；<br>方法一</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../static/css/style.css&quot;&gt;
+</code></pre><p>方法二（推荐）：</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/style.css&quot;&gt;
+</code></pre><p>方法三：</p>
+<pre><code>{% load static %}
+&lt;link rel=&quot;stylesheet&quot; href=&quot;{% static 'css/style.css' %}&quot;&gt;
+</code></pre><h2 id="2标签"><a href="#2标签" class="headerlink" title="2标签"></a>2标签</h2><h3 id="2-1if标签"><a href="#2-1if标签" class="headerlink" title="2.1if标签"></a>2.1if标签</h3><pre><code>{% if name %}
+        {{ name }}
+    {% else %}
+        name为空
+    {% endif %}
+</code></pre><h3 id="2-2for标签"><a href="#2-2for标签" class="headerlink" title="2.2for标签"></a>2.2for标签</h3><pre><code>{% for i in a %}
+        i
+    {% empty %}
+        a变量为空
+    {% endfor %}
+</code></pre><h3 id="2-3forloop变量"><a href="#2-3forloop变量" class="headerlink" title="2.3forloop变量"></a>2.3forloop变量</h3><p>if和for中自带变量forloop，用于统计for循环循环的次数<br>判断循环最后一次：,返回布尔值<br>判断循环第一次：,返回布尔值<br>ifequal:判断两个值是否相等<br>从0开始统计，不加0就从1开始<br>倒序以0结束<br>{\% ifequal forloop.counter 3 %}判断是否等于3</p>
+<pre><code>{% for i in a %}
+        `<p 2="" {%="" if="" forloop.counter="=" %}="" style="font-weight: bold;" endif="">`
+        `</p><p {%="" if="" forloop.first="" %}="" style="font-weight:bold;" endif="">`
+        `</p><p 3="" {%="" ifequal="" forloop.counter="" %}="" style="font-weight:bold;" endifequal="">
+            `编号:{{ forloop.counter0 }}  成绩:{{ i }}`
+        </p>`
+    {% empty %}
+        a变量为空
+    {% endfor %}
+</code></pre><h3 id="2-4注解"><a href="#2-4注解" class="headerlink" title="2.4注解"></a>2.4注解</h3><p>web形式注解:&lt;！–注解内容–&gt;，需注意不能定义错误的标签语法<br>django框架中的注解 单行注解;{\% comment %}注解内容{\% endcomment %} 多行注解</p>
+<h2 id="3过滤器"><a href="#3过滤器" class="headerlink" title="3过滤器"></a>3过滤器</h2><pre><code>将内容进行渲染再展示{{ a | 过滤器 }}
+</code></pre><p>safe:解析变量中的样式<br>default:默认值<br>upper:/lower:变量大小写的转换<br>capfirst:首字母大写<br>random:随机取字符<br>first/last:取出变量中的首/尾元素<br>length:计算变量的长度<br>add:变量的加减</p>
+<pre><code>&lt;p&gt;{{ b | safe }}&lt;/p&gt;
+&lt;!--全部转大写--&gt;
+&lt;p&gt;{{ 'python' | upper }}&lt;/p&gt;
+&lt;!--全部转小写--&gt;
+&lt;p&gt;{{ 'PYthOn' | lower }}&lt;/p&gt;
+&lt;!--内容加1--&gt;
+&lt;p&gt;{{ 4 | add:'1' }}&lt;/p&gt;
+&lt;!--内容减1--&gt;
+&lt;p&gt;{{ 4 | add:'-1' }}&lt;/p&gt;
+&lt;!--首字母大写--&gt;
+&lt;p&gt;{{ 'python' | capfirst }}&lt;/p&gt;
+&lt;!--空默认为无--&gt;
+&lt;p&gt;{{ '' | default:'无' }}&lt;/p&gt;
+&lt;!--解析第一个字符--&gt;
+&lt;p&gt;{{ 'python' | first }}&lt;/p&gt;
+&lt;!--解析最后一个字符--&gt;
+&lt;p&gt;{{ 'python' | last }}&lt;/p&gt;
+&lt;!--随机取一个字符--&gt;
+&lt;p&gt;{{ 'python' | random }}&lt;/p&gt;
+</code></pre><h2 id="4继承"><a href="#4继承" class="headerlink" title="4继承"></a>4继承</h2><p>父模板：定义好可以被子模板动态填充内容的block块<br>子模板：继承于父模板，并实现填充block块的内容<br>定义block块的名字不能重复<br>继承:{\% extends ‘父模板’ %}<br>动态填充block块的内容:{\% block 名称 %}{\% endblock %}<br>获取父模板中块之前定义好的内容:</p>
+<pre><code>&lt;!--定义模板--&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    {% block js %}
+        {% endblock %}
+&lt;/head&gt;
+&lt;body&gt;
+    {% block content %}
+        {% endblock %}
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;!--子模板继承父模板内容--&gt;
+{% extends 'base.html' %}
+{% block js %}
+        <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    {% endblock %}
+</code></pre><h2 id="5路由urls"><a href="#5路由urls" class="headerlink" title="5路由urls"></a>5路由urls</h2><h3 id="5-1配置路由分发"><a href="#5-1配置路由分发" class="headerlink" title="5.1配置路由分发"></a>5.1配置路由分发</h3><p>django项目中urls.py文件中配置<br>path(‘app/‘,include(‘app.urls’)), 新版本django<br>path(‘app/‘,include(‘app.urls’, ‘app’)) 老版本django</p>
+<h3 id="5-2接收参数"><a href="#5-2接收参数" class="headerlink" title="5.2接收参数"></a>5.2接收参数</h3><p>每个应用下对应的urls.py文件中配置</p>
+<pre><code>urlpatterns = [
+    re_path(&apos;index/(\d+)/&apos;, views.index), #路由匹配的值为int类型
+    path(&apos;index/&lt;int:id&gt;/&apos;, views.index), #路由匹配的值为int类型
+    path(&apos;name/&lt;str:name&gt;/&apos;, views.get_name), #路由匹配的值为字符类型
+    path(&apos;get_uuid/&apos;, views.get_uuid), #路由匹配的值为uuid类型
+    path(&apos;g_uuid/&lt;uuid:uid&gt;/&apos;, views.g_uuid),
+    path(&apos;path/&lt;path:phth&gt;/&apos;, views.get_path), #路由匹配的值为path类型
+    # 接收多个参数
+    path(&apos;params/&lt;int:year&gt;/&lt;int:month&gt;/&lt;int:day&gt;/&apos;, views.params),
+    re_path(&apos;params/(\d+)/(\d+)/(\d+)/&apos;,views.params),
+    re_path(&apos;params/(?P&lt;year&gt;\d+)/(?P&lt;month&gt;\d+)/(?P&lt;day&gt;\d+)/&apos;,views.params)
+]
+
+def params(request, year, month, day):
+    return HttpResponse(&apos;%s年%s月%s日&apos; % (year,month,day))
+
+def get_uuid(request):
+    uid = str(uuid.uuid4())
+    return HttpResponse(uid)
+</code></pre>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
     <a href="/2019/01/07/模板设计/">
     <time datetime="2019-01-07T11:32:25.000Z" class="entry-date">
         2019-01-07
@@ -124,135 +209,24 @@
     
     </footer>
 </article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2019/01/04/模型设计/">模型设计</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2019/01/04/模型设计/">
-    <time datetime="2019-01-04T12:32:25.000Z" class="entry-date">
-        2019-01-04
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2019/01/03/模型关系映射/">模型关系映射</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2019/01/03/模型关系映射/">
-    <time datetime="2019-01-03T12:22:25.000Z" class="entry-date">
-        2019-01-03
-    </time>
-</a>
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/01/08/cookie及session/" rel="prev"><span class="meta-nav">←</span> cookie及session</a></span>
     
     
-    </footer>
-</article>
-  
+        <span class="nav-next"><a href="/2019/01/04/模型设计/" rel="next">模型设计 <span class="meta-nav">→</span></a></span>
     
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2019/01/02/django环境搭建/">django环境搭建</a>
-    </h1>
-  
+</nav><!-- .nav-single -->
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2019/01/02/django环境搭建/">
-    <time datetime="2019-01-02T11:01:25.000Z" class="entry-date">
-        2019-01-02
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/">redis数据库主要语法-及与mysql结合用法示例</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/">
-    <time datetime="2018-12-30T11:01:25.000Z" class="entry-date">
-        2018-12-30
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2018/12/20/hello-world/">Hello World</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2018/12/20/hello-world/">
-    <time datetime="2018-12-20T11:12:25.367Z" class="entry-date">
-        2018-12-20
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-  
-    </div></section>
-  
+
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
