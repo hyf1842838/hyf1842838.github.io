@@ -70,6 +70,199 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-中间件、分页及文件上传" class="post-中间件、分页及文件上传 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2019/01/09/中间件、分页及文件上传/">中间件、分页及文件上传</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/09/中间件、分页及文件上传/" data-id="cjqpf0mcg0006msuruo54exdz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h2 id="1装饰器-闭包"><a href="#1装饰器-闭包" class="headerlink" title="1装饰器(闭包)"></a>1装饰器(闭包)</h2><p>装饰器三特征<br>1.外层函数内嵌内层函数<br>2.外层函数返回内层函数<br>3.内层函数调用外层函数的参数<br>不用装饰器时的hindex方法</p>
+<pre><code>def hindex(request):
+if request.method == &apos;GET&apos;:
+    if request.session.get(&apos;user_id&apos;): #判断user_id存在不
+        user_id = request.session[&apos;user_id&apos;]
+        user = User.objects.get(pk=user_id)
+        print(&apos;当前登陆系统的人为:%s&apos; % user.username)
+        return render(request, &apos;index.html&apos;)
+else:
+    return render(request, &apos;login.html&apos;)
+</code></pre><p>用装饰器实现上述方法</p>
+<pre><code>def is_login(func):
+def check_status(request):
+    if request.session.get(&apos;user_id&apos;):
+        return func(request) #相当于my_index函数
+    else:
+        return HttpResponseRedirect(reverse(&apos;user:login&apos;))
+return check_status
+
+装饰器实现hindex函数的方法
+@is_login
+def my_hindex(request):
+    if request.method == &apos;GET&apos;:
+        return render(request, &apos;index.html&apos;)
+</code></pre><h2 id="2中间件"><a href="#2中间件" class="headerlink" title="2中间件"></a>2中间件</h2><h3 id="2-1中间件基本概念"><a href="#2-1中间件基本概念" class="headerlink" title="2.1中间件基本概念"></a>2.1中间件基本概念</h3><p>中间件的作用就是：面向切面编程AOP，在httpRequest请求还没到的view之前，与view返回的httpResponse还未发送给请求者之前，对httpRequest与httpResponse做出修改。<br>Django的setting文件中有一个MIDDLEWARE_CLASSES列表专门放置中间件；只要把中间件放入MIDDLEWARE_CLASSES中就可以使用。<br>中间件有process_request(用户发起访问请求到匹配路由之间)、process_view(匹配路由到业务之间)、process_template_response(业务到html模板之间)、process_exception(异常捕获：业务到模型至模板之间)及process_response(模板到用户看到的渲染页面之间)五种；<br>其中process_request、process_view及process_response三种经常用到；<br>五个中间件函数：<br>1.process_request(self,request):在匹配路由之前被调用；<br>在process_request不要写return http对象（否则其他中间件不再被执行），但可以写return None表示不在执行本中间件以下内容，直接跳出process_request方法<br>2.process_view(self,request,view_func,view_args,view_kwargs):在执行视图函数之前被调用<br>3.process_response(self,request,response):在视图函数响应之后被调用<br>4.process_template_response():默认不会被主动调用<br>5.process_exception():默认不会被主动调用，当出现异常时，才会被触发<br>中间件执行顺序，先执行process_request，再执行视图函数(views)，最后执行process_response<br> 有多个中间件的时候的执行顺序，先按定义顺序将所有process_request执行完，再执行视图函数(views)，最后逆序执行所有process_response<br>执行process_request从上到下执行，执行process_view从上到下执行；剩下三个都是从下到上执行<br>process_request函数中不能写return内容，写了将会在此结束只执行process_request和process_response</p>
+<h3 id="2-2中间件函数的基本参数及示例"><a href="#2-2中间件函数的基本参数及示例" class="headerlink" title="2.2中间件函数的基本参数及示例"></a>2.2中间件函数的基本参数及示例</h3><pre><code>from user.models import User
+class TestMiddlware1(MiddlewareMixin):
+    def process_request(self, request):
+        print(&apos;test1 process request&apos;)
+         对所有的请求都进行登陆状态的校验
+        path = request.path
+        if path in [&apos;/user/register/&apos;, &apos;/user/login/&apos;, &apos;/user/my_login/&apos;]:
+             跳过以下所有代码，直接访问路由对应的视图函数
+            return None
+        try:
+            user_id = request.session[&apos;user_id&apos;]
+            user = User.objects.get(pk=user_id)
+            request.user = user
+            return None
+        except Exception as e:
+            return HttpResponseRedirect(reverse(&apos;user:my_login&apos;))
+
+def process_view(self, request, view_func, view_args, view_kwargs):
+    print(&apos;test1 view&apos;)
+def process_response(self, request, response):
+    print(&apos;test1 process response&apos;)
+    return response
+
+class TestMiddlware2(MiddlewareMixin):
+    def process_request(self, request):
+        print(&apos;test2 process request&apos;)
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&apos;test2 view&apos;)
+    def process_response(self, request, response):
+        print(&apos;test2 process response&apos;)
+        return response
+    #test1 process request、test2 process request、test1 view
+    #test2 view、test2 process response、test1 process response
+</code></pre><h2 id="3分页"><a href="#3分页" class="headerlink" title="3分页"></a>3分页</h2><p>分页可以有两种方法；切片和用paginator库<br>切片主要是先查询出要查看的内容的所有信息，然后对信息进行按要查看的页进行切片</p>
+<h3 id="3-1切片分页"><a href="#3-1切片分页" class="headerlink" title="3.1切片分页"></a>3.1切片分页</h3><p>page = int(request.GET.get(‘page’, 1))；获取要查看的页码<br>stus = Student.objects.all()[((page-1)<em>3):(page</em>3)]；获得要查看的页的信息</p>
+<pre><code>def all_stu(request):
+if request.method == &apos;GET&apos;:
+    获取分页的角码
+    pag = int(request.GET.get(&apos;page&apos;, 1))
+    第一种方式：使用切片实现分页
+    stus = Student.objects.all()[((pag-1)*3):(pag*3)]
+    return render(request, &apos;stus.html&apos;, {&apos;stus&apos;: stus})
+</code></pre><h3 id="3-2paginator库分页"><a href="#3-2paginator库分页" class="headerlink" title="3.2paginator库分页"></a>3.2paginator库分页</h3><p>pg=Paginator(总数据，一页显示信息数)<br>取某一页信息:pg.page(某页)<br>page_range:页码<br>has_previous:是否有上一页<br>has_next：是否有下一页<br>previous_page_number:上一页的页码<br>paginator.page(所获取具体某页的页数)<br>stus.has_previous 判断stus中当前页面是否存在上一页，返回布尔值<br>stus.has_next 判断stus中当前页面是否存在下一页，返回布尔值<br>stus.previous_page_number获取stus中当前页面中的上一页的页码，返回int值<br>stus.number：获取当前页页码<br>stus.paginator.num_pages：获取共多少页</p>
+<pre><code>def all_stu(request):
+if request.method == &apos;GET&apos;:
+    获取分页的角码
+    pag = int(request.GET.get(&apos;page&apos;, 1))
+    第二种方式：使用Paginator库实现分页
+    stus = Student.objects.all()
+    pg = Paginator(stus, 3)
+    my_stu = pg.page(pag)
+    return render(request, &apos;stus.html&apos;, {&apos;stus&apos;: my_stu})
+</code></pre><p>html中代码<br>在html文件中跳转至另一个路由：/app/add_stu/</p>
+<pre><code>&lt;a href=&quot;{% url 'app:add_stu' %}&quot;&gt;添加学生信息&lt;/a&gt;
+
+{% extends 'base_main.html' %}
+{% block content %}
+        <p><a href="{% url 'app:add_stu' %}">添加学生信息</a></p>
+        <table>
+            <thead>
+                <th>编号:</th>
+                <th>姓名:</th>
+                <th>年龄:</th>
+                <th>性别:</th>
+                <th>头像:</th>
+            </thead>
+            <tbody>
+                {% for stu in stus %}
+                    <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ stu.s_name }}</td>
+                    <td>{{ stu.s_age }}</td>
+                    <td>{% if stu.s_gender %}
+                            男
+                        {% else %}
+                            女
+                        {% endif %}
+                    </td>
+                    <td><img src="/media/{{ stu.icon }}"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>
+            当前第{{ stus.number }}页，共{{ stus.paginator.num_pages }}页
+    
+            {% if stus.has_previous %}
+                <a href="{% url 'app:all_stu' %}?page={{ stus.previous_page_number }}">上一页</a>
+            {% endif %}
+            {#        分页并标记页码进行跳转#}
+            {% for i in stus.paginator.page_range %}
+    {#            <a href="/app/all_stu/?page={{ i }}">{{ i }}</a>#}
+                <a href="{% url 'app:all_stu' %}?page={{ i }}">{{ i }}</a>
+            {% endfor %}
+            {% if stus.has_next %}
+                <a href="{% url 'app:all_stu' %}?page={{ stus.next_page_number }}">下一页</a>
+            {% endif %}
+        </p>
+        {% for stu in stus %}
+        {% endfor %}
+    {% endblock %}
+</code></pre><h2 id="4文件上传"><a href="#4文件上传" class="headerlink" title="4文件上传"></a>4文件上传</h2><p>文件上传需要先安装Pillow（执行pip install Pillow）<br>文件上传中，需要在前端的form表单中添加enctype=”multipart/form-data”参数<br>后端获取上传的图片等文件：request.FILES.get(key)或requests.FILES[‘key’]<br>在模型中新加字段：ImageField(upload_to=’upload’)<br>模板中解析:&lt;img src=’/media/‘</p>
+<h3 id="4-1文件上传的配置"><a href="#4-1文件上传的配置" class="headerlink" title="4.1文件上传的配置"></a>4.1文件上传的配置</h3><p>settings中最后配置访问media目录<br>MEDIA_URL = ‘/media/‘<br>MEDIA_ROOT = os.path.join(BASE_DIR, ‘media’)<br>django工程文件下路由文件中的最后配置<br>from django.contrib.staticfiles.urls import static<br>urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)<br>​<br>    class Student(models.Model):<br>        icon = models.ImageField(upload_to=’upload’, null=True)<br>添加了新的字段后，不要再次迁移，而是到数据库的查询文件中新添加一列</p>
+<pre><code>alter table student add icon varchar(100) null;数据库中给表添加一列
+</code></pre><p>输入姓名和上传图片</p>
+<pre><code>{% extends 'base_main.html' %}
+{% block content %}
+        <form action="" method="post" enctype="multipart/form-data">
+            <p>姓名:<input type="text" name="username"></p>
+            <p>图片:<input type="file" name="icon"></p>
+            <p><input type="submit" value="提交"></p>
+        </form>
+    {% endblock %}
+</code></pre><p>新建用户保存上传文件及姓名</p>
+<pre><code>def add_stu(request):
+    if request.method == &apos;GET&apos;:
+        return render(request, &apos;add_stu.html&apos;)
+    if request.method == &apos;POST&apos;:
+        # 1.获取数据
+        username = request.POST.get(&apos;username&apos;)
+        icon = request.FILES.get(&apos;icon&apos;)
+        # 2. 保存
+        Student.objects.create(s_name=username, icon=icon)
+        # 3. 跳转到列表页面
+        return HttpResponseRedirect(reverse(&apos;app:all_stu&apos;))
+</code></pre><p>查看文件代码见3.2代码块中</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/09/中间件、分页及文件上传/">
+    <time datetime="2019-01-09T15:53:25.000Z" class="entry-date">
+        2019-01-09
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-cookie及session" class="post-cookie及session post type-post status-publish format-standard hentry">
     <!---->
 
@@ -85,7 +278,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/08/cookie及session/" data-id="cjqnsax5b000440urk11ro82p" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/08/cookie及session/" data-id="cjqpf0mbx0004msurfvpdho25" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -118,7 +311,7 @@ def hindex(request):
 </code></pre><h2 id="3登陆"><a href="#3登陆" class="headerlink" title="3登陆"></a>3登陆</h2><h3 id="3-1render和redirect的区别"><a href="#3-1render和redirect的区别" class="headerlink" title="3.1render和redirect的区别"></a>3.1render和redirect的区别</h3><p>render是将变量渲染到当前页面中；<br>而redirect是HTTP中的1个跳转的函数,一般会生成302状态码，是直接跳转到一个新的页面</p>
 <pre><code>return render(request, &apos;login.html&apos;)
 return HttpResponseRedirect(reverse(&apos;user:login&apos;))
-</code></pre><h3 id="3-2登陆"><a href="#3-2登陆" class="headerlink" title="3.2登陆"></a>3.2登陆</h3><p>res.set_cookie(‘token’, token, max_age=30)将变量token的值作为值赋给键token，生成一个存在时间为30秒的cookie<br>check_password(password,user.password),返回布尔值;用输入的密码跟数据库存储的密码进行比较是否相同<br> random.choice(s) 从变量s中随机取一个字符<br>获取登陆提交的参数：<br>username = request.POST.get(‘username’)<br>password = request.POST.get(‘password’)<br>cookie：产生背景：由于http无状态协议，导致后端无法知道当前发送请求的人是谁，用于存储一些不是很重要的内容；<br>存储：set_cookie(key,value,max_age/expris(存储时间秒/存储到的日期))<br>删除：delete_cookie(key)</p>
+</code></pre><h3 id="3-2登陆"><a href="#3-2登陆" class="headerlink" title="3.2登陆"></a>3.2登陆</h3><p>res.set_cookie(‘token’, token, max_age=30)将变量token的值作为值赋给键token，生成一个存在时间为30秒的cookie<br>check_password(password,user.password),返回布尔值;用输入的密码跟数据库存储的密码进行比较是否相同<br>password = make_password(password) 对密码进行加密转成暗码（注册生效存入数据库时使用）<br> random.choice(s) 从变量s中随机取一个字符<br>获取登陆提交的参数：<br>username = request.POST.get(‘username’)<br>password = request.POST.get(‘password’)<br>cookie：产生背景：由于http无状态协议，导致后端无法知道当前发送请求的人是谁，用于存储一些不是很重要的内容；<br>存储：set_cookie(key,value,max_age/expris(存储时间秒/存储到的日期))<br>删除：delete_cookie(key)</p>
 <pre><code>def login(request):
     if request.method == &apos;GET&apos;:
         return render(request, &apos;login.html&apos;)
@@ -206,11 +399,12 @@ return HttpResponseRedirect(reverse(&apos;user:login&apos;))
             return render(request, &apos;login.html&apos;, {&apos;msg&apos;: msg})
 </code></pre><h2 id="8用session获取当前登陆用户信息"><a href="#8用session获取当前登陆用户信息" class="headerlink" title="8用session获取当前登陆用户信息"></a>8用session获取当前登陆用户信息</h2><pre><code>def hindex(request):
     if request.method == &apos;GET&apos;:
-        从session中取数据
-        user_id = request.session[&apos;user_id&apos;]
-        user = User.objects.get(pk=user_id)
-        print(&apos;当前登陆系统的人为:%s&apos; % user.username)
-        return render(request, &apos;index.html&apos;)
+        if request.session.get(&apos;user_id&apos;): #判断user_id存在不
+            从session中取数据
+            user_id = request.session[&apos;user_id&apos;]
+            user = User.objects.get(pk=user_id)
+            print(&apos;当前登陆系统的人为:%s&apos; % user.username)
+            return render(request, &apos;index.html&apos;)
     else:
         return render(request, &apos;login.html&apos;)
 </code></pre><h2 id="9用session退出"><a href="#9用session退出" class="headerlink" title="9用session退出"></a>9用session退出</h2><p>退出登陆可以用以下方法实现<br>删除cookie中的sessionid值<br>删除django_session表中的数据<br>删除django_session表中的session_data中的user_id<br>以上三种方法都可以实现退出操作</p>
@@ -255,7 +449,7 @@ return HttpResponseRedirect(reverse(&apos;user:login&apos;))
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/07/模板设计/" data-id="cjqnsax52000340urw6xhefcu" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/07/模板设计/" data-id="cjqpf0mb60003msurjo2d7o2v" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -392,7 +586,7 @@ def get_uuid(request):
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqnsax5f000640urwljg788t" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/04/模型设计/" data-id="cjqpf0mcm0007msurew2mrmmc" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -585,7 +779,7 @@ def index(request):
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqnsax4z000240urvw5t72sl" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/03/模型关系映射/" data-id="cjqpf0mau0002msur32xi0f9r" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -730,7 +924,7 @@ for stu in stus:
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqnsax4h000040urwlkijuzr" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/02/django环境搭建/" data-id="cjqpf0m9l0000msurqjmx8gte" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -836,7 +1030,7 @@ class Student(models.Model):
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/" data-id="cjqnsax5d000540urioyhsxt4" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/30/redis数据库主要语法-及与mysql结合用法示例/" data-id="cjqpf0mc10005msurbwamrwyq" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -1042,7 +1236,7 @@ def my_dis():
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqnsax4u000140ur2p2xjwbz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2018/12/20/hello-world/" data-id="cjqpf0mah0001msur0thzwf1i" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -1097,6 +1291,10 @@ def my_dis():
       <ul>
         
           <li>
+            <a href="/2019/01/09/中间件、分页及文件上传/">中间件、分页及文件上传</a>
+          </li>
+        
+          <li>
             <a href="/2019/01/08/cookie及session/">cookie及session</a>
           </li>
         
@@ -1110,10 +1308,6 @@ def my_dis():
         
           <li>
             <a href="/2019/01/03/模型关系映射/">模型关系映射</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/02/django环境搭建/">django环境搭建</a>
           </li>
         
       </ul>
@@ -1134,7 +1328,7 @@ def my_dis():
   <aside class="widget">
     <h3 class="widget-title">Archives</h3>
     <div class="widget-content">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </aside>
 

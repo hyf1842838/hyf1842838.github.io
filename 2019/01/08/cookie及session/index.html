@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="玄武岩">
 <meta property="og:description" content="1请求方式请求方式有get和post两种方式；数据查询用get请求数据操作（增、删及改操作）用post请求 1.1参数类型传参GET：获取get请求传递的参数（request.GET[‘key’]/request.GET.get(‘key’)）传参POST：获取post请求传递的参数（request.POST[‘key’]/request.POST.get(‘key’)）传参FILES：获取上传的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T11:34:26.897Z">
+<meta property="og:updated_time" content="2019-01-09T02:14:50.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cookie及session">
 <meta name="twitter:description" content="1请求方式请求方式有get和post两种方式；数据查询用get请求数据操作（增、删及改操作）用post请求 1.1参数类型传参GET：获取get请求传递的参数（request.GET[‘key’]/request.GET.get(‘key’)）传参POST：获取post请求传递的参数（request.POST[‘key’]/request.POST.get(‘key’)）传参FILES：获取上传的">
@@ -90,7 +90,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/08/cookie及session/" data-id="cjqnsax5b000440urk11ro82p" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/08/cookie及session/" data-id="cjqpf0mbx0004msurfvpdho25" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -123,7 +123,7 @@ def hindex(request):
 </code></pre><h2 id="3登陆"><a href="#3登陆" class="headerlink" title="3登陆"></a>3登陆</h2><h3 id="3-1render和redirect的区别"><a href="#3-1render和redirect的区别" class="headerlink" title="3.1render和redirect的区别"></a>3.1render和redirect的区别</h3><p>render是将变量渲染到当前页面中；<br>而redirect是HTTP中的1个跳转的函数,一般会生成302状态码，是直接跳转到一个新的页面</p>
 <pre><code>return render(request, &apos;login.html&apos;)
 return HttpResponseRedirect(reverse(&apos;user:login&apos;))
-</code></pre><h3 id="3-2登陆"><a href="#3-2登陆" class="headerlink" title="3.2登陆"></a>3.2登陆</h3><p>res.set_cookie(‘token’, token, max_age=30)将变量token的值作为值赋给键token，生成一个存在时间为30秒的cookie<br>check_password(password,user.password),返回布尔值;用输入的密码跟数据库存储的密码进行比较是否相同<br> random.choice(s) 从变量s中随机取一个字符<br>获取登陆提交的参数：<br>username = request.POST.get(‘username’)<br>password = request.POST.get(‘password’)<br>cookie：产生背景：由于http无状态协议，导致后端无法知道当前发送请求的人是谁，用于存储一些不是很重要的内容；<br>存储：set_cookie(key,value,max_age/expris(存储时间秒/存储到的日期))<br>删除：delete_cookie(key)</p>
+</code></pre><h3 id="3-2登陆"><a href="#3-2登陆" class="headerlink" title="3.2登陆"></a>3.2登陆</h3><p>res.set_cookie(‘token’, token, max_age=30)将变量token的值作为值赋给键token，生成一个存在时间为30秒的cookie<br>check_password(password,user.password),返回布尔值;用输入的密码跟数据库存储的密码进行比较是否相同<br>password = make_password(password) 对密码进行加密转成暗码（注册生效存入数据库时使用）<br> random.choice(s) 从变量s中随机取一个字符<br>获取登陆提交的参数：<br>username = request.POST.get(‘username’)<br>password = request.POST.get(‘password’)<br>cookie：产生背景：由于http无状态协议，导致后端无法知道当前发送请求的人是谁，用于存储一些不是很重要的内容；<br>存储：set_cookie(key,value,max_age/expris(存储时间秒/存储到的日期))<br>删除：delete_cookie(key)</p>
 <pre><code>def login(request):
     if request.method == &apos;GET&apos;:
         return render(request, &apos;login.html&apos;)
@@ -211,11 +211,12 @@ return HttpResponseRedirect(reverse(&apos;user:login&apos;))
             return render(request, &apos;login.html&apos;, {&apos;msg&apos;: msg})
 </code></pre><h2 id="8用session获取当前登陆用户信息"><a href="#8用session获取当前登陆用户信息" class="headerlink" title="8用session获取当前登陆用户信息"></a>8用session获取当前登陆用户信息</h2><pre><code>def hindex(request):
     if request.method == &apos;GET&apos;:
-        从session中取数据
-        user_id = request.session[&apos;user_id&apos;]
-        user = User.objects.get(pk=user_id)
-        print(&apos;当前登陆系统的人为:%s&apos; % user.username)
-        return render(request, &apos;index.html&apos;)
+        if request.session.get(&apos;user_id&apos;): #判断user_id存在不
+            从session中取数据
+            user_id = request.session[&apos;user_id&apos;]
+            user = User.objects.get(pk=user_id)
+            print(&apos;当前登陆系统的人为:%s&apos; % user.username)
+            return render(request, &apos;index.html&apos;)
     else:
         return render(request, &apos;login.html&apos;)
 </code></pre><h2 id="9用session退出"><a href="#9用session退出" class="headerlink" title="9用session退出"></a>9用session退出</h2><p>退出登陆可以用以下方法实现<br>删除cookie中的sessionid值<br>删除django_session表中的数据<br>删除django_session表中的session_data中的user_id<br>以上三种方法都可以实现退出操作</p>
@@ -243,6 +244,8 @@ return HttpResponseRedirect(reverse(&apos;user:login&apos;))
     
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/01/09/中间件、分页及文件上传/" rel="prev"><span class="meta-nav">←</span> 中间件、分页及文件上传</a></span>
     
     
         <span class="nav-next"><a href="/2019/01/07/模板设计/" rel="next">模板设计 <span class="meta-nav">→</span></a></span>
@@ -272,6 +275,10 @@ return HttpResponseRedirect(reverse(&apos;user:login&apos;))
       <ul>
         
           <li>
+            <a href="/2019/01/09/中间件、分页及文件上传/">中间件、分页及文件上传</a>
+          </li>
+        
+          <li>
             <a href="/2019/01/08/cookie及session/">cookie及session</a>
           </li>
         
@@ -285,10 +292,6 @@ return HttpResponseRedirect(reverse(&apos;user:login&apos;))
         
           <li>
             <a href="/2019/01/03/模型关系映射/">模型关系映射</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/02/django环境搭建/">django环境搭建</a>
           </li>
         
       </ul>
@@ -309,7 +312,7 @@ return HttpResponseRedirect(reverse(&apos;user:login&apos;))
   <aside class="widget">
     <h3 class="widget-title">Archives</h3>
     <div class="widget-content">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </aside>
 

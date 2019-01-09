@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="1装饰器(闭包)装饰器三特征1.外层函数内嵌内层函数2.外层函数返回内层函数3.内层函数调用外层函数的参数不用装饰器时的hindex方法
+def hindex(request):
+if request.method == &amp;apos;GET&amp;apos;:
+    if request.session">
+  
+
+  
+  
+  <meta name="google-site-verification" content="NCXVSqxqB-os803-VFMtIEd1SUNJVOIjctCfNYUwD0w">
+  <meta name="baidu-site-verification" content="Nzwx7HuplM">
+  
+  <meta name="msvalidate.01" content="9E9EA92F7E5327E1FE8A5196D5253664">
+  
+  
+  
+  <title>中间件、分页及文件上传 | 玄武岩</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1装饰器(闭包)装饰器三特征1.外层函数内嵌内层函数2.外层函数返回内层函数3.内层函数调用外层函数的参数不用装饰器时的hindex方法 def hindex(request): if request.method == &amp;apos;GET&amp;apos;:     if request.session.get(&amp;apos;user_id&amp;apos;): #判断user_id存在不         u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中间件、分页及文件上传">
+<meta property="og:url" content="http://yoursite.com/2019/01/09/中间件、分页及文件上传/index.html">
+<meta property="og:site_name" content="玄武岩">
+<meta property="og:description" content="1装饰器(闭包)装饰器三特征1.外层函数内嵌内层函数2.外层函数返回内层函数3.内层函数调用外层函数的参数不用装饰器时的hindex方法 def hindex(request): if request.method == &amp;apos;GET&amp;apos;:     if request.session.get(&amp;apos;user_id&amp;apos;): #判断user_id存在不         u">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/media/%7B%7B%20stu.icon%20%7D%7D">
+<meta property="og:updated_time" content="2019-01-09T16:45:06.216Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="中间件、分页及文件上传">
+<meta name="twitter:description" content="1装饰器(闭包)装饰器三特征1.外层函数内嵌内层函数2.外层函数返回内层函数3.内层函数调用外层函数的参数不用装饰器时的hindex方法 def hindex(request): if request.method == &amp;apos;GET&amp;apos;:     if request.session.get(&amp;apos;user_id&amp;apos;): #判断user_id存在不         u">
+<meta name="twitter:image" content="http://yoursite.com/media/%7B%7B%20stu.icon%20%7D%7D">
+  
+  
+    <link rel="icon" href="http://7u2hdm.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+</head></html>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="玄武岩" rel="home">玄武岩</a>
+      </h1>
+      
+        <script type="text/javascript" src="http://api.hitokoto.us/rand?encode=js&charset=utf-8"></script>
+        <h2 class="site-description"><script>hitokoto();</script></h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://it-ebooks.flygon.net/">电子书</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/makes">MAKES</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about">关于我</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/atom.xml">RSS</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://github.com/hyf1842838/blog">fork me on github</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-中间件、分页及文件上传" class="post-中间件、分页及文件上传 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      中间件、分页及文件上传
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/09/中间件、分页及文件上传/" data-id="cjqpf0mcg0006msuruo54exdz" class="leave-reply bdsharebuttonbox" data-cmd="more">分享</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h2 id="1装饰器-闭包"><a href="#1装饰器-闭包" class="headerlink" title="1装饰器(闭包)"></a>1装饰器(闭包)</h2><p>装饰器三特征<br>1.外层函数内嵌内层函数<br>2.外层函数返回内层函数<br>3.内层函数调用外层函数的参数<br>不用装饰器时的hindex方法</p>
+<pre><code>def hindex(request):
+if request.method == &apos;GET&apos;:
+    if request.session.get(&apos;user_id&apos;): #判断user_id存在不
+        user_id = request.session[&apos;user_id&apos;]
+        user = User.objects.get(pk=user_id)
+        print(&apos;当前登陆系统的人为:%s&apos; % user.username)
+        return render(request, &apos;index.html&apos;)
+else:
+    return render(request, &apos;login.html&apos;)
+</code></pre><p>用装饰器实现上述方法</p>
+<pre><code>def is_login(func):
+def check_status(request):
+    if request.session.get(&apos;user_id&apos;):
+        return func(request) #相当于my_index函数
+    else:
+        return HttpResponseRedirect(reverse(&apos;user:login&apos;))
+return check_status
+
+装饰器实现hindex函数的方法
+@is_login
+def my_hindex(request):
+    if request.method == &apos;GET&apos;:
+        return render(request, &apos;index.html&apos;)
+</code></pre><h2 id="2中间件"><a href="#2中间件" class="headerlink" title="2中间件"></a>2中间件</h2><h3 id="2-1中间件基本概念"><a href="#2-1中间件基本概念" class="headerlink" title="2.1中间件基本概念"></a>2.1中间件基本概念</h3><p>中间件的作用就是：面向切面编程AOP，在httpRequest请求还没到的view之前，与view返回的httpResponse还未发送给请求者之前，对httpRequest与httpResponse做出修改。<br>Django的setting文件中有一个MIDDLEWARE_CLASSES列表专门放置中间件；只要把中间件放入MIDDLEWARE_CLASSES中就可以使用。<br>中间件有process_request(用户发起访问请求到匹配路由之间)、process_view(匹配路由到业务之间)、process_template_response(业务到html模板之间)、process_exception(异常捕获：业务到模型至模板之间)及process_response(模板到用户看到的渲染页面之间)五种；<br>其中process_request、process_view及process_response三种经常用到；<br>五个中间件函数：<br>1.process_request(self,request):在匹配路由之前被调用；<br>在process_request不要写return http对象（否则其他中间件不再被执行），但可以写return None表示不在执行本中间件以下内容，直接跳出process_request方法<br>2.process_view(self,request,view_func,view_args,view_kwargs):在执行视图函数之前被调用<br>3.process_response(self,request,response):在视图函数响应之后被调用<br>4.process_template_response():默认不会被主动调用<br>5.process_exception():默认不会被主动调用，当出现异常时，才会被触发<br>中间件执行顺序，先执行process_request，再执行视图函数(views)，最后执行process_response<br> 有多个中间件的时候的执行顺序，先按定义顺序将所有process_request执行完，再执行视图函数(views)，最后逆序执行所有process_response<br>执行process_request从上到下执行，执行process_view从上到下执行；剩下三个都是从下到上执行<br>process_request函数中不能写return内容，写了将会在此结束只执行process_request和process_response</p>
+<h3 id="2-2中间件函数的基本参数及示例"><a href="#2-2中间件函数的基本参数及示例" class="headerlink" title="2.2中间件函数的基本参数及示例"></a>2.2中间件函数的基本参数及示例</h3><pre><code>from user.models import User
+class TestMiddlware1(MiddlewareMixin):
+    def process_request(self, request):
+        print(&apos;test1 process request&apos;)
+         对所有的请求都进行登陆状态的校验
+        path = request.path
+        if path in [&apos;/user/register/&apos;, &apos;/user/login/&apos;, &apos;/user/my_login/&apos;]:
+             跳过以下所有代码，直接访问路由对应的视图函数
+            return None
+        try:
+            user_id = request.session[&apos;user_id&apos;]
+            user = User.objects.get(pk=user_id)
+            request.user = user
+            return None
+        except Exception as e:
+            return HttpResponseRedirect(reverse(&apos;user:my_login&apos;))
+
+def process_view(self, request, view_func, view_args, view_kwargs):
+    print(&apos;test1 view&apos;)
+def process_response(self, request, response):
+    print(&apos;test1 process response&apos;)
+    return response
+
+class TestMiddlware2(MiddlewareMixin):
+    def process_request(self, request):
+        print(&apos;test2 process request&apos;)
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&apos;test2 view&apos;)
+    def process_response(self, request, response):
+        print(&apos;test2 process response&apos;)
+        return response
+    #test1 process request、test2 process request、test1 view
+    #test2 view、test2 process response、test1 process response
+</code></pre><h2 id="3分页"><a href="#3分页" class="headerlink" title="3分页"></a>3分页</h2><p>分页可以有两种方法；切片和用paginator库<br>切片主要是先查询出要查看的内容的所有信息，然后对信息进行按要查看的页进行切片</p>
+<h3 id="3-1切片分页"><a href="#3-1切片分页" class="headerlink" title="3.1切片分页"></a>3.1切片分页</h3><p>page = int(request.GET.get(‘page’, 1))；获取要查看的页码<br>stus = Student.objects.all()[((page-1)<em>3):(page</em>3)]；获得要查看的页的信息</p>
+<pre><code>def all_stu(request):
+if request.method == &apos;GET&apos;:
+    获取分页的角码
+    pag = int(request.GET.get(&apos;page&apos;, 1))
+    第一种方式：使用切片实现分页
+    stus = Student.objects.all()[((pag-1)*3):(pag*3)]
+    return render(request, &apos;stus.html&apos;, {&apos;stus&apos;: stus})
+</code></pre><h3 id="3-2paginator库分页"><a href="#3-2paginator库分页" class="headerlink" title="3.2paginator库分页"></a>3.2paginator库分页</h3><p>pg=Paginator(总数据，一页显示信息数)<br>取某一页信息:pg.page(某页)<br>page_range:页码<br>has_previous:是否有上一页<br>has_next：是否有下一页<br>previous_page_number:上一页的页码<br>paginator.page(所获取具体某页的页数)<br>stus.has_previous 判断stus中当前页面是否存在上一页，返回布尔值<br>stus.has_next 判断stus中当前页面是否存在下一页，返回布尔值<br>stus.previous_page_number获取stus中当前页面中的上一页的页码，返回int值<br>stus.number：获取当前页页码<br>stus.paginator.num_pages：获取共多少页</p>
+<pre><code>def all_stu(request):
+if request.method == &apos;GET&apos;:
+    获取分页的角码
+    pag = int(request.GET.get(&apos;page&apos;, 1))
+    第二种方式：使用Paginator库实现分页
+    stus = Student.objects.all()
+    pg = Paginator(stus, 3)
+    my_stu = pg.page(pag)
+    return render(request, &apos;stus.html&apos;, {&apos;stus&apos;: my_stu})
+</code></pre><p>html中代码<br>在html文件中跳转至另一个路由：/app/add_stu/</p>
+<pre><code>&lt;a href=&quot;{% url 'app:add_stu' %}&quot;&gt;添加学生信息&lt;/a&gt;
+
+{% extends 'base_main.html' %}
+{% block content %}
+        <p><a href="{% url 'app:add_stu' %}">添加学生信息</a></p>
+        <table>
+            <thead>
+                <th>编号:</th>
+                <th>姓名:</th>
+                <th>年龄:</th>
+                <th>性别:</th>
+                <th>头像:</th>
+            </thead>
+            <tbody>
+                {% for stu in stus %}
+                    <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ stu.s_name }}</td>
+                    <td>{{ stu.s_age }}</td>
+                    <td>{% if stu.s_gender %}
+                            男
+                        {% else %}
+                            女
+                        {% endif %}
+                    </td>
+                    <td><img src="/media/{{ stu.icon }}"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>
+            当前第{{ stus.number }}页，共{{ stus.paginator.num_pages }}页
+    
+            {% if stus.has_previous %}
+                <a href="{% url 'app:all_stu' %}?page={{ stus.previous_page_number }}">上一页</a>
+            {% endif %}
+            {#        分页并标记页码进行跳转#}
+            {% for i in stus.paginator.page_range %}
+    {#            <a href="/app/all_stu/?page={{ i }}">{{ i }}</a>#}
+                <a href="{% url 'app:all_stu' %}?page={{ i }}">{{ i }}</a>
+            {% endfor %}
+            {% if stus.has_next %}
+                <a href="{% url 'app:all_stu' %}?page={{ stus.next_page_number }}">下一页</a>
+            {% endif %}
+        </p>
+        {% for stu in stus %}
+        {% endfor %}
+    {% endblock %}
+</code></pre><h2 id="4文件上传"><a href="#4文件上传" class="headerlink" title="4文件上传"></a>4文件上传</h2><p>文件上传需要先安装Pillow（执行pip install Pillow）<br>文件上传中，需要在前端的form表单中添加enctype=”multipart/form-data”参数<br>后端获取上传的图片等文件：request.FILES.get(key)或requests.FILES[‘key’]<br>在模型中新加字段：ImageField(upload_to=’upload’)<br>模板中解析:&lt;img src=’/media/‘</p>
+<h3 id="4-1文件上传的配置"><a href="#4-1文件上传的配置" class="headerlink" title="4.1文件上传的配置"></a>4.1文件上传的配置</h3><p>settings中最后配置访问media目录<br>MEDIA_URL = ‘/media/‘<br>MEDIA_ROOT = os.path.join(BASE_DIR, ‘media’)<br>django工程文件下路由文件中的最后配置<br>from django.contrib.staticfiles.urls import static<br>urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)<br>​<br>    class Student(models.Model):<br>        icon = models.ImageField(upload_to=’upload’, null=True)<br>添加了新的字段后，不要再次迁移，而是到数据库的查询文件中新添加一列</p>
+<pre><code>alter table student add icon varchar(100) null;数据库中给表添加一列
+</code></pre><p>输入姓名和上传图片</p>
+<pre><code>{% extends 'base_main.html' %}
+{% block content %}
+        <form action="" method="post" enctype="multipart/form-data">
+            <p>姓名:<input type="text" name="username"></p>
+            <p>图片:<input type="file" name="icon"></p>
+            <p><input type="submit" value="提交"></p>
+        </form>
+    {% endblock %}
+</code></pre><p>新建用户保存上传文件及姓名</p>
+<pre><code>def add_stu(request):
+    if request.method == &apos;GET&apos;:
+        return render(request, &apos;add_stu.html&apos;)
+    if request.method == &apos;POST&apos;:
+        # 1.获取数据
+        username = request.POST.get(&apos;username&apos;)
+        icon = request.FILES.get(&apos;icon&apos;)
+        # 2. 保存
+        Student.objects.create(s_name=username, icon=icon)
+        # 3. 跳转到列表页面
+        return HttpResponseRedirect(reverse(&apos;app:all_stu&apos;))
+</code></pre><p>查看文件代码见3.2代码块中</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/09/中间件、分页及文件上传/">
+    <time datetime="2019-01-09T15:53:25.000Z" class="entry-date">
+        2019-01-09
+    </time>
+</a>
+    
+    
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2019/01/08/cookie及session/" rel="next">cookie及session <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s">
+        <input type="submit" id="searchsubmit" value="搜索">
+    </div>
+</form></aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/09/中间件、分页及文件上传/">中间件、分页及文件上传</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/08/cookie及session/">cookie及session</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/07/模板设计/">模板设计</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/04/模型设计/">模型设计</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/03/模型关系映射/">模型关系映射</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    <aside class="widget">
+    <h3 class="widget-title">关于我</h3>
+    <div class="widget-content">
+      <p>邮箱：huyifi@163.com</p>
+      <p>QQ：1838267371</p>
+      
+    </div>
+</aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget-content">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+      <audio src="https://img.hacpai.com/file/2018/11/karera_wo_tame_no_koushinnkyoku-95a27a16.mp3" controls="controls" style="width:100%">
+        您的浏览器不支持 audio 标签。
+      </audio>
+    </div>
+  </aside>
+
+  
+    <script>
+    // sub title
+    var subtitleList = [
+        "『不懂形式语言就是不懂语言。』——沃·兹基硕德",
+        "『涉及到物理实体的项目，必须要仔细论证。』——沃·兹基硕德",
+        "『你有无知的权利，也有发表看法的权利，但是没有「无知 && 发表看法」的权利。』——沃·兹基硕德",
+        "『韮之大者，高位接盘！』——沃·兹基硕德",
+        "『卑鄙是卑鄙者的通行证，高尚是高尚者的墓志铭。』——北岛",
+        "『邪人用正法亦邪，正人用邪法亦正。』——谚语",
+        "『坦白从宽牢底坐穿，抗拒从严回家过年。』——谚语",
+        "『Stay young. Stay simple. Always naive!』——谚语",
+        "『3D 打印领域急需一场开源运动。』——沃·兹基硕德",
+        "『你们媒体千万要记着，不要「见得风，是得雨」。接到消息，你们媒体本身也要判断。』——长者",
+        "『假设这些完全无中生有的东西，你再帮他说一遍，你等于......你也有责任吧？』——长者",
+        "『刚才你问我啊，我可以回答你一句「无可奉告」。』——长者",
+        "『我告诉你们我是身经百战了，见得多了！』——长者",
+        "『美国的华莱士，比你们不知要高到哪里去了，我跟他谈笑风生。』——长者",
+        "『我有这个必要告诉你们一点，人生的经验。』——长者",
+        "『我没有说要钦定，没有任何这个意思。』——长者",
+        "『你们啊，不要想喜欢弄个大新闻，说现在已经钦定了，就把我批判一番。』——长者",
+        "『一个人的命运啊，当然要靠自我奋斗，但是也要考虑历史的进程。』——长者",
+        "『我说另请高明吧，我实在也不是谦虚。』——长者",
+        "『苟利国家生死以，岂因祸福避趋之。』——林则徐《赴戍登程口占示家人二首》",
+        "『敢同恶鬼争高下，不向霸王让寸分。』——毛泽东《七律·庆祝第二次核试验成功》",
+        "『我生不为逐鹿来，都门懒筑黄金台。状元百官都如狗，总是刀下觳觫材。』——张献忠《七杀诗》",
+        "『一泓海水杯中泻，更变千年如走马。』——李贺《梦天》",
+    ];
+    
+    document.addEventListener('DOMContentLoaded', evt => {
+        var i = Math.floor(Math.random() * subtitleList.length);
+        document.querySelector('#subtitle').innerText = subtitleList[i];
+    });
+
+    //Kill XP and IE8
+    (function(){
+        var ua = navigator.userAgent;
+        var res = /Windows NT (\d+\.\d+)/.exec(ua);
+        var xpOrLower = res && JSON.parse(res[1]) < 6;
+        res = /MSIE (\d+\.\d+)/.exec(ua);
+        var ie8OrLower = res && JSON.parse(res[1]) < 9;
+        if(xpOrLower || ie8OrLower) {
+            alert('请不要用XP及之前的Windows系统，和IE8及之前的IE浏览器访问本站！');
+            location.href = "about:blank";
+        }
+        var fromBaiduSE = /^https?:\/\/www.baidu.com/.test(document.referrer);
+        if(fromBaiduSE) {
+            alert('检测到你还在使用百度搜索，作为一个程序员，这是一种自暴自弃！\n\n做不作恶的程序员，从不用百度开始！');
+            location.href = "about:blank";
+        }
+    })();
+</script>
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2019 hyf</p>
+    <p>All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
